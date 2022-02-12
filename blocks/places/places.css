@@ -1,0 +1,11 @@
+.places {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin: 0 auto;
+    max-width: 880px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

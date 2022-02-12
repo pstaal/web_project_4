@@ -16,3 +16,10 @@
 @import url(../blocks/profile/__button-name-change/profile__button-name-change.css);
 @import url(../blocks/profile/__function/profile__function.css);
 @import url(../blocks/profile/__button-add-place/profile__button-add-place.css);
+
+@import url(../blocks/places/places.css);
+@import url(../blocks/places/__card/places__card.css);
+@import url(../blocks/places/__card-image/places__card-image.css);
+@import url(../blocks/places/__card-content/places__card-content.css);
+@import url(../blocks/places/__card-title/places__card-title.css);
+@import url(../blocks/places/__card-button/places__card-button.css);
