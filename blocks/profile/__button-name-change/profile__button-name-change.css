@@ -6,3 +6,7 @@
     margin-top: 16px;
     cursor: pointer;
 }
+
+.profile__button-name-change:hover {
+    opacity: 0.8;
+}

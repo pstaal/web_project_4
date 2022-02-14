@@ -6,3 +6,7 @@
     margin: 0 0 0 auto;
     cursor: pointer;
 }
+
+.profile__button-add-place:hover {
+    opacity: 0.8;
+}

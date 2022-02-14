@@ -22,3 +22,25 @@ let expertiseValue = document.querySelector('.profile__function').textContent;
 
 nameInput.value = nameValue;
 expertiseInput.value = expertiseValue;
+
+//change the name and function in the DOM
+let formElement = document.querySelector('.popup__form'); 
+
+function handleProfileFormSubmit(evt) {
+    
+    evt.preventDefault();
+    
+    let newName = nameInput.value;
+    let newExpertise = expertiseInput.value;
+
+    document.querySelector('.profile__name').textContent = newName;
+    document.querySelector('.profile__function').textContent = newExpertise;
+
+    //close modal
+    popup.classList.remove('popup__opened');
+
+}
+
+// Connect the handler to the form:
+// it will watch the submit event
+formElement.addEventListener('submit', handleProfileFormSubmit); 
