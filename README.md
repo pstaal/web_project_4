@@ -1,16 +1,11 @@
-# Project 4: Around The U.S.
+## Around The U.S.
 
-### Overview
+The fourth project of the online web developer bootcamp Practicum. This is an interactive and responsive website with a personal profile, and different places that a person has visited. The user can edit his or her profile, add new places, and favorite places. 
 
-* Figma
-* Images
+## Technologies
 
-**Figma**
+The website uses html, css and vanilla javascript.
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+## Website
 
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+The website is hosted on [Github Pages](https://pstaal.github.io/web_project_4/)
