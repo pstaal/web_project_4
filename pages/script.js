@@ -44,3 +44,12 @@ function handleProfileFormSubmit(evt) {
 // Connect the handler to the form:
 // it will watch the submit event
 formElement.addEventListener('submit', handleProfileFormSubmit); 
+
+//submit form when clicking enter button
+document.addEventListener("keyup", function(event) {
+    
+    if (event.keyCode === 13 && popup.classList.contains('popup__opened')) {
+      formElement.submit();
+    }
+    return;
+  });

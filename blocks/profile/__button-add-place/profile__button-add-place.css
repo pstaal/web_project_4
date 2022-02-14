@@ -8,5 +8,23 @@
 }
 
 .profile__button-add-place:hover {
-    opacity: 0.8;
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 930px) {
+    .profile__button-add-place {
+        margin: 0 0 0 20px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .profile__button-add-place {
+        margin: 36px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile__button-add-place {
+        width: 100%;
+    }
 }

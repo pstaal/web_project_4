@@ -9,3 +9,15 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 930px) {
+    .places {
+        max-width: 581px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .places {
+        max-width: 282px;
+    }
+}

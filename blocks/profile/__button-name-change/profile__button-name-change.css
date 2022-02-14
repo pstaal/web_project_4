@@ -8,5 +8,11 @@
 }
 
 .profile__button-name-change:hover {
-    opacity: 0.8;
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 800px) {
+    .profile__button-name-change {
+        margin-top: 26px;
+    }
 }
