@@ -1,9 +1,9 @@
 .profile__button-add-place {
     width: 150px;
     height: 50px;
-    background-color: #000;
     border: 2px solid #fff;
     margin: 0 0 0 auto;
+    border-radius: 2px;
     cursor: pointer;
 }
 
