@@ -18,7 +18,7 @@
 
   @font-face {
      font-family: 'Inter';
-     font-style:  bold;
+     font-style:  normal;
      font-weight: 900;
      font-display: swap;
      src: url("../../pages/Inter/Inter-Black.woff2") format("woff2"),

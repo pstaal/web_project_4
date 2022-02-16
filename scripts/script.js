@@ -9,10 +9,8 @@ let profileFunction = document.querySelector('.profile__function');
 
 function openModal(){
     //set values of textinputs
-    let nameValue = document.querySelector('.profile__name').textContent;
-    let expertiseValue = document.querySelector('.profile__function').textContent;
-    nameInput.value = nameValue;
-    expertiseInput.value = expertiseValue;
+    nameInput.value = profileName.textContent;
+    expertiseInput.value = profileFunction.textContent;
     popup.classList.add('popup_opened');
 }
 

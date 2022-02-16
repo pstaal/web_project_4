@@ -1,8 +1,13 @@
 .profile__button-name-change {
+    padding: 0;
     height: 24px;
     width: 24px;
     border: 1px solid #fff;
     margin-top: 16px;
+    background-image: url(../../../images/marker.svg);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: transparent;
     cursor: pointer;
 }
@@ -13,6 +18,8 @@
 
 @media screen and (max-width: 800px) {
     .profile__button-name-change {
-        margin-top: 26px;
+        margin-top: 39px;
+        height: 8px;
+        width: 8px;
     }
 }
