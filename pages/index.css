@@ -18,6 +18,7 @@
 
 @import url(../blocks/places/places.css);
 @import url(../blocks/places/__card/places__card.css);
+@import url(../blocks/places/__card-delete-icon/places__card-delete-icon.css);
 @import url(../blocks/places/__card-image/places__card-image.css);
 @import url(../blocks/places/__card-content/places__card-content.css);
 @import url(../blocks/places/__card-title/places__card-title.css);
