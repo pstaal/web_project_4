@@ -80,6 +80,7 @@ const openPopup = (evt) => {
   
  if (evt.target === newPlaceButton) {
      newPopup.querySelector('.popup__title').textContent = "New Place";
+     newPopup.querySelector('.popup__button').textContent ="Create";
      let inputs = newPopup.querySelectorAll('.popup__input');
      inputs[0].setAttribute('name', 'title');
      inputs[0].setAttribute('placeholder', 'Title');
@@ -89,6 +90,7 @@ const openPopup = (evt) => {
      return;
     } else if (evt.target === editButton) {
     newPopup.querySelector('.popup__title').textContent = "Edit Profile";
+    newPopup.querySelector('.popup__button').textContent ="Save";
     let inputs = newPopup.querySelectorAll('.popup__input');
     inputs[0].setAttribute('name', 'name');
     inputs[0].value = profileName.textContent;
