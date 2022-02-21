@@ -44,6 +44,8 @@ function createCard(data) {
     cardElement.querySelector('.places__card-title').textContent = data.name;
     //add event listener for likes
     cardElement.querySelector('.places__card-button').addEventListener('click', toggleHeart);
+    //add event listener to remove card
+    cardElement.querySelector('.places__card-delete-icon').addEventListener('click', removeCard);
     return cardElement;
   } 
 
@@ -91,6 +93,10 @@ function addPlace(evt) {
 
 function toggleHeart(evt){
     evt.target.classList.toggle('places__card-button-liked');
+}
+
+function removeCard(evt){
+    evt.target.parentElement.remove();
 }
 
 
