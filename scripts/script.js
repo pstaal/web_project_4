@@ -8,7 +8,6 @@ let newPlaceButton = document.querySelector('.profile__button-add-place');
 let bodyPage = document.querySelector('.page');
 
 
-
 //initial cards 
 const initialCards = [
     {
@@ -43,6 +42,8 @@ function createCard(data) {
     const cardElement = cardTemplate.querySelector('.places__card').cloneNode(true);
     cardElement.querySelector('.places__card-image').setAttribute("src", data.link);
     cardElement.querySelector('.places__card-title').textContent = data.name;
+    //add event listener for likes
+    cardElement.querySelector('.places__card-button').addEventListener('click', toggleHeart);
     return cardElement;
   } 
 
@@ -57,7 +58,7 @@ function closePopup(){
     document.querySelector('.popup').remove();
 }
 
-function handleProfileFormSubmit(evt) {
+function editProfile(evt) {
     
     evt.preventDefault();
     
@@ -70,6 +71,26 @@ function handleProfileFormSubmit(evt) {
     //close popup
     closePopup();
 
+}
+
+function addPlace(evt) {
+
+    evt.preventDefault();
+
+    let placeTitle = document.querySelector("[name='title']").value;
+    let placeURL = document.querySelector("[name='link']").value;
+
+    let newCard = createCard({link: placeURL, name: placeTitle});
+    newCard.querySelector('.places__card-image').setAttribute("alt", placeTitle);
+    cardContainer.prepend(newCard);
+
+     //close popup
+    closePopup();
+}
+
+
+function toggleHeart(evt){
+    evt.target.classList.toggle('places__card-button-liked');
 }
 
 
@@ -86,6 +107,7 @@ const openPopup = (evt) => {
      inputs[0].setAttribute('placeholder', 'Title');
      inputs[1].setAttribute('name', 'link');
      inputs[1].setAttribute('placeholder', 'Image URL');
+     newPopup.querySelector('.popup__form').addEventListener('submit', addPlace);
      bodyPage.append(newPopup);
      return;
     } else if (evt.target === editButton) {
@@ -96,7 +118,7 @@ const openPopup = (evt) => {
     inputs[0].value = profileName.textContent;
     inputs[1].setAttribute('name', 'function');
     inputs[1].value = profileFunction.textContent;
-    newPopup.querySelector('.popup__form').addEventListener('submit', handleProfileFormSubmit);
+    newPopup.querySelector('.popup__form').addEventListener('submit', editProfile);
     bodyPage.append(newPopup);
     return;
     }
@@ -108,5 +130,6 @@ newPlaceButton.addEventListener('click', openPopup);
 
 //add event listener to the profile change button
 editButton.addEventListener('click', openPopup);
+
 
 
