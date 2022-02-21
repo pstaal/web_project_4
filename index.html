@@ -27,48 +27,7 @@
             </div>
             <section>
                 <ul class="places">
-                    <li class="places__card">
-                        <img class="places__card-image" src="images/yosemite.jpg" alt="yosemite park">
-                        <div class="places__card-content">
-                            <h2 class="places__card-title">Yosemite Valley</h2>
-                            <button type="button" class="places__card-button"><img src="images/heart.svg" alt="heart icon" class="places__card-icon"></button>
-                        </div>
-                    </li>
-                    <li class="places__card">
-                        <img class="places__card-image" src="images/lake_louise.jpg" alt="lake louise">
-                        <div class="places__card-content">
-                            <h2 class="places__card-title">Lake Louise</h2>
-                            <button type="button" class="places__card-button"><img src="images/heart.svg" alt="heart icon" class="places__card-icon"></button>
-                        </div>
-                    </li>
-                    <li class="places__card">
-                        <img class="places__card-image" src="images/bald_mountains.jpg" alt="bald mountains">
-                        <div class="places__card-content">
-                            <h2 class="places__card-title">Bald Mountains</h2>
-                            <button type="button" class="places__card-button"><img src="images/heart.svg" alt="heart icon" class="places__card-icon"></button>
-                        </div>
-                    </li>
-                    <li class="places__card">
-                        <img class="places__card-image" src="images/latemar.jpg" alt="latemar">
-                        <div class="places__card-content">
-                            <h2 class="places__card-title">Latemar</h2>
-                            <button type="button" class="places__card-button"><img src="images/heart.svg" alt="heart icon" class="places__card-icon"></button>
-                        </div>
-                    </li>
-                    <li class="places__card">
-                        <img class="places__card-image" src="images/vanoise.jpg" alt="vanoise national park">
-                        <div class="places__card-content">
-                            <h2 class="places__card-title">Vanoise National Park</h2>
-                            <button type="button" class="places__card-button"><img src="images/heart.svg" alt="heart icon" class="places__card-icon"></button>
-                        </div>
-                    </li>
-                    <li class="places__card">
-                        <img class="places__card-image" src="images/lago_di_braies.jpg" alt="lago di braies">
-                        <div class="places__card-content">
-                            <h2 class="places__card-title">Lago Di Braies</h2>
-                            <button type="button" class="places__card-button"><img src="images/heart.svg" alt="heart icon" class="places__card-icon"></button>
-                        </div>
-                    </li>
+                    <!-- insert the array of cards here -->
                 </ul>
             </section>
         </main>
@@ -86,6 +45,15 @@
                 </form>
             </div>
         </div>
+        <template id="card-template">
+            <li class="places__card">
+                <img class="places__card-image" alt="yosemite park">
+                <div class="places__card-content">
+                    <h2 class="places__card-title"></h2>
+                    <button type="button" class="places__card-button"><img src="images/heart.svg" alt="heart icon" class="places__card-icon"></button>
+                </div>
+            </li>
+        </template>
         <script src="scripts/script.js"></script>
     </body>
 </html>

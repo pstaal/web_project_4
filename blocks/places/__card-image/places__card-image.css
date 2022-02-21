@@ -1,5 +1,6 @@
 .places__card-image {
-    width: 100%;
+    width: 282px;
+    height: 282px;
     object-fit: cover;
     display: block;
 }
