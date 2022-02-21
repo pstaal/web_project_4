@@ -1,11 +1,12 @@
 let popup = document.querySelector('.popup');
 let editButton = document.querySelector('.profile__button-name-change');
 let closeButton = document.querySelector('.popup__close');
-let nameInput = document.querySelector("[name='name']");
-let expertiseInput = document.querySelector("[name='function']");
 let profileName = document.querySelector('.profile__name');
 let profileFunction = document.querySelector('.profile__function');
 let cardContainer = document.querySelector('.places');
+let newPlaceButton = document.querySelector('.profile__button-add-place');
+let bodyPage = document.querySelector('.page');
+
 
 
 //initial cards 
@@ -45,48 +46,65 @@ function createCard(data) {
     return cardElement;
   } 
 
+//put all initial cards into the DOM
 initialCards.forEach((card) => {
     let newCard = createCard(card);
     cardContainer.append(newCard);
 });
 
-function openModal(){
-    //set values of textinputs
-    nameInput.value = profileName.textContent;
-    expertiseInput.value = profileFunction.textContent;
-    popup.classList.add('popup_opened');
+
+function closePopup(){
+    document.querySelector('.popup').remove();
 }
-
-function closeModal(){
-    popup.classList.remove('popup_opened');
-}
-
-editButton.addEventListener('click', openModal);
-closeButton.addEventListener('click', closeModal);
-
-
-
-
-
-//change the name and function in the DOM
-let formElement = document.querySelector('.popup__form'); 
 
 function handleProfileFormSubmit(evt) {
     
     evt.preventDefault();
     
-    let newName = nameInput.value;
-    let newExpertise = expertiseInput.value;
+    let newName = document.querySelector("[name='name']").value;
+    let newExpertise = document.querySelector("[name='function']").value;
 
     profileName.textContent = newName;
     profileFunction.textContent = newExpertise;
 
-    //close modal
-    closeModal();
+    //close popup
+    closePopup();
 
 }
 
-// Connect the handler to the form:
-// it will watch the submit event
-formElement.addEventListener('submit', handleProfileFormSubmit); 
+
+const openPopup = (evt) => {
+    const popupTemplate = document.querySelector('#popup-template').content;
+    const newPopup = popupTemplate.querySelector('.popup').cloneNode(true);
+    newPopup.querySelector('.popup__close').addEventListener('click', closePopup);
+  
+ if (evt.target === newPlaceButton) {
+     newPopup.querySelector('.popup__title').textContent = "New Place";
+     let inputs = newPopup.querySelectorAll('.popup__input');
+     inputs[0].setAttribute('name', 'title');
+     inputs[0].setAttribute('placeholder', 'Title');
+     inputs[1].setAttribute('name', 'link');
+     inputs[1].setAttribute('placeholder', 'Image URL');
+     bodyPage.append(newPopup);
+     return;
+    } else if (evt.target === editButton) {
+    newPopup.querySelector('.popup__title').textContent = "Edit Profile";
+    let inputs = newPopup.querySelectorAll('.popup__input');
+    inputs[0].setAttribute('name', 'name');
+    inputs[0].value = profileName.textContent;
+    inputs[1].setAttribute('name', 'function');
+    inputs[1].value = profileFunction.textContent;
+    newPopup.querySelector('.popup__form').addEventListener('submit', handleProfileFormSubmit);
+    bodyPage.append(newPopup);
+    return;
+    }
+    return;
+};
+
+//add event listener to the new place button
+newPlaceButton.addEventListener('click', openPopup);
+
+//add event listener to the profile change button
+editButton.addEventListener('click', openPopup);
+
 
