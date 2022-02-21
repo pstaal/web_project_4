@@ -42,10 +42,13 @@ function createCard(data) {
     const cardElement = cardTemplate.querySelector('.places__card').cloneNode(true);
     cardElement.querySelector('.places__card-image').setAttribute("src", data.link);
     cardElement.querySelector('.places__card-title').textContent = data.name;
+    cardElement.querySelector('.places__card-image').setAttribute("alt", data.name);
     //add event listener for likes
     cardElement.querySelector('.places__card-button').addEventListener('click', toggleHeart);
     //add event listener to remove card
     cardElement.querySelector('.places__card-delete-icon').addEventListener('click', removeCard);
+    //add event listener to open picture
+    cardElement.querySelector('.places__card-image').addEventListener('click', openPicture);
     return cardElement;
   } 
 
@@ -83,7 +86,6 @@ function addPlace(evt) {
     let placeURL = document.querySelector("[name='link']").value;
 
     let newCard = createCard({link: placeURL, name: placeTitle});
-    newCard.querySelector('.places__card-image').setAttribute("alt", placeTitle);
     cardContainer.prepend(newCard);
 
      //close popup
@@ -99,6 +101,21 @@ function removeCard(evt){
     evt.target.parentElement.remove();
 }
 
+function closePicture(evt) {
+    evt.target.parentElement.parentElement.remove();
+}
+
+function openPicture(evt){
+    let imageLink = evt.target.src;
+    let imageName = evt.target.alt;
+    const pictureTemplate = document.querySelector('#popup-picture-template').content;
+    const newPicture = pictureTemplate.querySelector('.popup-picture').cloneNode(true);
+    newPicture.querySelector('.popup-picture__image').setAttribute('src', imageLink);
+    newPicture.querySelector('.popup-picture__image').setAttribute('alt', imageName);
+    newPicture.querySelector('.popup-picture__title').textContent = imageName;
+    newPicture.querySelector('.popup-picture__button').addEventListener('click', closePicture);
+    bodyPage.append(newPicture);
+}
 
 const openPopup = (evt) => {
     const popupTemplate = document.querySelector('#popup-template').content;
@@ -115,7 +132,6 @@ const openPopup = (evt) => {
      inputs[1].setAttribute('placeholder', 'Image URL');
      newPopup.querySelector('.popup__form').addEventListener('submit', addPlace);
      bodyPage.append(newPopup);
-     return;
     } else if (evt.target === editButton) {
     newPopup.querySelector('.popup__title').textContent = "Edit Profile";
     newPopup.querySelector('.popup__button').textContent ="Save";
@@ -126,9 +142,7 @@ const openPopup = (evt) => {
     inputs[1].value = profileFunction.textContent;
     newPopup.querySelector('.popup__form').addEventListener('submit', editProfile);
     bodyPage.append(newPopup);
-    return;
     }
-    return;
 };
 
 //add event listener to the new place button
