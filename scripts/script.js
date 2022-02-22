@@ -6,9 +6,16 @@ let profileFunction = document.querySelector('.profile__function');
 let cardContainer = document.querySelector('.places');
 let newPlaceButton = document.querySelector('.profile__button-add-place');
 let bodyPage = document.querySelector('.page');
+let popupForPlace = document.querySelector('.popup-picture');
+let popupImage = document.querySelector('.popup-picture__image');
+let popupImageTitle = document.querySelector('.popup-picture__title');
+let popupPictureCloseButton = document.querySelector('.popup-picture__button');
+let popupTitle = document.querySelector('.popup__title');
+let popupButton = document.querySelector('.popup__button');
+let popupInputs = document.querySelectorAll('.popup__input');
+let popupForm = document.querySelector('.popup__form');
 
-
-//initial cards 
+//initial cards for the page
 const initialCards = [
     {
       name: "Yosemite Valley",
@@ -58,11 +65,7 @@ initialCards.forEach((card) => {
     cardContainer.append(newCard);
 });
 
-
-function closePopup(){
-    document.querySelector('.popup').remove();
-}
-
+//change the profile name and function
 function editProfile(evt) {
     
     evt.preventDefault();
@@ -73,11 +76,12 @@ function editProfile(evt) {
     profileName.textContent = newName;
     profileFunction.textContent = newExpertise;
 
-    //close popup
-    closePopup();
-
+    //close modal
+    closeFormModal();
 }
 
+
+//add a new place to the list
 function addPlace(evt) {
 
     evt.preventDefault();
@@ -88,8 +92,8 @@ function addPlace(evt) {
     let newCard = createCard({link: placeURL, name: placeTitle});
     cardContainer.prepend(newCard);
 
-     //close popup
-    closePopup();
+     //close modal
+    closeFormModal();
 }
 
 
@@ -101,55 +105,66 @@ function removeCard(evt){
     evt.target.parentElement.remove();
 }
 
-function closePicture(evt) {
-    evt.target.parentElement.parentElement.remove();
+function closePictureModal() {
+  popupForPlace.classList.remove('popup__opened');
 }
+
+function openPictureModal(){
+   popupForPlace.classList.add('popup__opened');
+}
+
+function closeFormModal() {
+  popupInputs[0].value = "";
+  popupInputs[1].value = "";
+  popup.classList.remove('popup__opened');
+}
+
+function openFormModal(evt){
+   popup.classList.add('popup__opened');
+}
+
 
 function openPicture(evt){
     let imageLink = evt.target.src;
     let imageName = evt.target.alt;
-    const pictureTemplate = document.querySelector('#popup-picture-template').content;
-    const newPicture = pictureTemplate.querySelector('.popup-picture').cloneNode(true);
-    newPicture.querySelector('.popup-picture__image').setAttribute('src', imageLink);
-    newPicture.querySelector('.popup-picture__image').setAttribute('alt', imageName);
-    newPicture.querySelector('.popup-picture__title').textContent = imageName;
-    newPicture.querySelector('.popup-picture__button').addEventListener('click', closePicture);
-    bodyPage.append(newPicture);
+    
+    popupImage.setAttribute('src', imageLink);
+    popupImage.setAttribute('alt', imageName);
+    popupPictureCloseButton.addEventListener('click', closePictureModal);
+    
+    openPictureModal();
 }
 
-const openPopup = (evt) => {
-    const popupTemplate = document.querySelector('#popup-template').content;
-    const newPopup = popupTemplate.querySelector('.popup').cloneNode(true);
-    newPopup.querySelector('.popup__close').addEventListener('click', closePopup);
-  
- if (evt.target === newPlaceButton) {
-     newPopup.querySelector('.popup__title').textContent = "New Place";
-     newPopup.querySelector('.popup__button').textContent ="Create";
-     let inputs = newPopup.querySelectorAll('.popup__input');
-     inputs[0].setAttribute('name', 'title');
-     inputs[0].setAttribute('placeholder', 'Title');
-     inputs[1].setAttribute('name', 'link');
-     inputs[1].setAttribute('placeholder', 'Image URL');
-     newPopup.querySelector('.popup__form').addEventListener('submit', addPlace);
-     bodyPage.append(newPopup);
-    } else if (evt.target === editButton) {
-    newPopup.querySelector('.popup__title').textContent = "Edit Profile";
-    newPopup.querySelector('.popup__button').textContent ="Save";
-    let inputs = newPopup.querySelectorAll('.popup__input');
-    inputs[0].setAttribute('name', 'name');
-    inputs[0].value = profileName.textContent;
-    inputs[1].setAttribute('name', 'function');
-    inputs[1].value = profileFunction.textContent;
-    newPopup.querySelector('.popup__form').addEventListener('submit', editProfile);
-    bodyPage.append(newPopup);
-    }
+function openPlacePopup () { 
+     closeButton.addEventListener('click', closeFormModal);
+     popupTitle.textContent = "New Place";
+     popupButton.textContent ="Create";
+     popupInputs[0].setAttribute('name', 'title');
+     popupInputs[0].setAttribute('placeholder', 'Title');
+     popupInputs[1].setAttribute('name', 'link');
+     popupInputs[1].setAttribute('placeholder', 'Image URL');
+     popupForm.addEventListener('submit', addPlace);
+     openFormModal();
+}
+
+
+function openProfilePopup () {
+    closeButton.addEventListener('click', closeFormModal);
+    popupTitle.textContent = "Edit Profile";
+    popupButton.textContent ="Save";
+    popupInputs[0].setAttribute('name', 'name');
+    popupInputs[0].value = profileName.textContent;
+    popupInputs[1].setAttribute('name', 'function');
+    popupInputs[1].value = profileFunction.textContent;
+    popupForm.addEventListener('submit', editProfile);
+    openFormModal(); 
 };
 
 //add event listener to the new place button
-newPlaceButton.addEventListener('click', openPopup);
+newPlaceButton.addEventListener('click', openPlacePopup);
 
 //add event listener to the profile change button
-editButton.addEventListener('click', openPopup);
+editButton.addEventListener('click', openProfilePopup);
 
 
 
