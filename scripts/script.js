@@ -106,21 +106,21 @@ function removeCard(evt){
 }
 
 function closePictureModal() {
-  popupForPlace.classList.remove('popup__opened');
+  popupForPlace.classList.remove('popup-picture_opened');
 }
 
 function openPictureModal(){
-   popupForPlace.classList.add('popup__opened');
+   popupForPlace.classList.add('popup-picture_opened');
 }
 
 function closeFormModal() {
   popupInputs[0].value = "";
   popupInputs[1].value = "";
-  popup.classList.remove('popup__opened');
+  popup.classList.remove('popup_opened');
 }
 
 function openFormModal(evt){
-   popup.classList.add('popup__opened');
+   popup.classList.add('popup_opened');
 }
 
 
