@@ -131,6 +131,7 @@ function openPicture(evt){
     popupImage.setAttribute('src', imageLink);
     popupImage.setAttribute('alt', imageName);
     popupPictureCloseButton.addEventListener('click', closePictureModal);
+    popupImageTitle.textContent = imageName;
     
     openPictureModal();
 }

@@ -1,6 +1,5 @@
 .popup-picture {
     display: flex;
-    visibility: hidden;
     justify-content: center;
     align-items: center;
     z-index: 1;
@@ -10,4 +9,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity ease-out 0.5s, visibility 0s ease-out 0.5s;
 }
