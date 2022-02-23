@@ -1,17 +1,18 @@
 let popup = document.querySelector('.popup');
 let popupProfile = document.querySelector('.popup-profile');
 let popupPlace = document.querySelector('.popup-place');
+let popupForPlace = document.querySelector('.popup-picture');
 let editButton = document.querySelector('.profile__button-name-change');
-let closeButton = document.querySelector('.popup__close');
+let popupProfileCloseButton = popupProfile.querySelector('.popup__close');
+let popupPlaceCloseButton = popupPlace.querySelector('.popup__close');
+let popupPictureCloseButton = popupForPlace.querySelector('.popup__close');
 let profileName = document.querySelector('.profile__name');
 let profileFunction = document.querySelector('.profile__function');
 let cardContainer = document.querySelector('.places');
 let newPlaceButton = document.querySelector('.profile__button-add-place');
 let bodyPage = document.querySelector('.page');
-let popupForPlace = document.querySelector('.popup-picture');
 let popupImage = document.querySelector('.popup-picture__image');
 let popupImageTitle = document.querySelector('.popup-picture__title');
-let popupPictureCloseButton = document.querySelector('.popup-picture__button');
 let popupTitle = document.querySelector('.popup__title');
 let popupButton = document.querySelector('.popup__button');
 let popupInputs = document.querySelectorAll('.popup__input');
@@ -80,7 +81,7 @@ function editProfile(evt) {
     profileFunction.textContent = newExpertise;
 
     //close modal
-    closeProfileModal();
+    closeModal(evt);
 }
 
 
@@ -96,7 +97,7 @@ function addPlace(evt) {
     cardContainer.prepend(newCard);
 
      //close modal
-    closePlaceModal();
+    closeModal(evt);
 }
 
 
@@ -112,28 +113,22 @@ function removeCard(evt){
     evt.target.parentElement.remove();
 }
 
-function closePictureModal() {
-  popupForPlace.classList.remove('popup-picture_opened');
-}
-
 function openPictureModal(){
-   popupForPlace.classList.add('popup-picture_opened');
-}
-
-function closeProfileModal() {
-  popupProfile.classList.remove('popup_opened');
+   popupForPlace.classList.add('popup_opened');
 }
 
 function openProfileModal(){
    popupProfile.classList.add('popup_opened');
 }
 
-function closePlaceModal() {
-  popupPlace.classList.remove('popup_opened');
-}
-
 function openPlaceModal(){
    popupPlace.classList.add('popup_opened');
+}
+
+
+function closeModal(evt){
+  console.log("working", evt.target.parentElement.parentElement);
+  evt.target.closest('.popup').classList.remove('popup_opened');
 }
 
 
@@ -144,20 +139,20 @@ function openPicture(evt){
     
     popupImage.setAttribute('src', imageLink);
     popupImage.setAttribute('alt', imageName);
-    popupPictureCloseButton.addEventListener('click', closePictureModal);
+    popupPictureCloseButton.addEventListener('click', closeModal);
     popupImageTitle.textContent = imageName;
     
     openPictureModal();
 }
 
 function openPlacePopup () { 
-     closeButton.addEventListener('click', closePlaceModal);
+     popupPlaceCloseButton.addEventListener('click', closeModal);
      popupFormPlace.addEventListener('submit', addPlace);
      openPlaceModal();
 }
 
 function openProfilePopup () {
-    closeButton.addEventListener('click', closeProfileModal);
+    popupProfileCloseButton.addEventListener('click', closeModal);
     popupInputs[0].value = profileName.textContent;
     popupInputs[1].value = profileFunction.textContent;
     openProfileModal(); 
