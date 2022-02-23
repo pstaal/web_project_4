@@ -1,23 +1,23 @@
-let popup = document.querySelector('.popup');
-let popupProfile = document.querySelector('.popup-profile');
-let popupPlace = document.querySelector('.popup-place');
-let popupForPlace = document.querySelector('.popup-picture');
-let editButton = document.querySelector('.profile__button-name-change');
-let popupProfileCloseButton = popupProfile.querySelector('.popup__close');
-let popupPlaceCloseButton = popupPlace.querySelector('.popup__close');
-let popupPictureCloseButton = popupForPlace.querySelector('.popup__close');
-let profileName = document.querySelector('.profile__name');
-let profileFunction = document.querySelector('.profile__function');
-let cardContainer = document.querySelector('.places');
-let newPlaceButton = document.querySelector('.profile__button-add-place');
-let bodyPage = document.querySelector('.page');
-let popupImage = document.querySelector('.popup-picture__image');
-let popupImageTitle = document.querySelector('.popup-picture__title');
-let popupTitle = document.querySelector('.popup__title');
-let popupButton = document.querySelector('.popup__button');
-let popupInputs = document.querySelectorAll('.popup__input');
-let popupFormProfile = document.querySelector('.popup__form-profile');
-let popupFormPlace = document.querySelector('.popup__form-place');
+const popup = document.querySelector('.popup');
+const popupProfile = document.querySelector('.popup-profile');
+const popupPlace = document.querySelector('.popup-place');
+const popupForPlace = document.querySelector('.popup-picture');
+const editButton = document.querySelector('.profile__button-name-change');
+const popupProfileCloseButton = popupProfile.querySelector('.popup__close');
+const popupPlaceCloseButton = popupPlace.querySelector('.popup__close');
+const popupPictureCloseButton = popupForPlace.querySelector('.popup__close');
+const profileName = document.querySelector('.profile__name');
+const profileFunction = document.querySelector('.profile__function');
+const cardContainer = document.querySelector('.places');
+const newPlaceButton = document.querySelector('.profile__button-add-place');
+const bodyPage = document.querySelector('.page');
+const popupImage = document.querySelector('.popup-picture__image');
+const popupImageTitle = document.querySelector('.popup-picture__title');
+const popupTitle = document.querySelector('.popup__title');
+const popupButton = document.querySelector('.popup__button');
+const popupInputs = document.querySelectorAll('.popup__input');
+const popupFormProfile = document.querySelector('.popup__form-profile');
+const popupFormPlace = document.querySelector('.popup__form-place');
 
 //initial cards for the page
 const initialCards = [
@@ -59,7 +59,7 @@ function createCard(data) {
     //add event listener to remove card
     cardElement.querySelector('.places__card-delete-icon').addEventListener('click', removeCard);
     //add event listener to open picture
-    cardElement.querySelector('.places__card-image').addEventListener('click', openPicture);
+    cardElement.querySelector('.places__card-image').addEventListener('click', openPicturePopup);
     return cardElement;
   } 
 
@@ -81,7 +81,7 @@ function editProfile(evt) {
     profileFunction.textContent = newExpertise;
 
     //close modal
-    closeModal(evt);
+    closeModal(popupProfile);
 }
 
 
@@ -97,12 +97,27 @@ function addPlace(evt) {
     cardContainer.prepend(newCard);
 
      //close modal
-    closeModal(evt);
+    closeModal(popupPlace);
 }
 
 
-//add event listenere to profile popup
+//add event listeners to submit the form for profile
 popupFormProfile.addEventListener('submit', editProfile);
+
+//add event listener to open the form for a new place card
+newPlaceButton.addEventListener('click', function(){openModal(popupPlace)});
+
+//add event listener to open the form for the profile
+editButton.addEventListener('click', openProfilePopup);
+
+//add event listener to submit the form for the new place card
+popupFormPlace.addEventListener('submit', addPlace);
+
+// add eventlisteners to the three modals
+popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
+popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlace)});
+popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
+
 
 
 function toggleHeart(evt){
@@ -113,56 +128,36 @@ function removeCard(evt){
     evt.target.parentElement.remove();
 }
 
-function openPictureModal(){
-   popupForPlace.classList.add('popup_opened');
+function openModal(element){
+   element.classList.add('popup_opened');
 }
 
-function openProfileModal(){
-   popupProfile.classList.add('popup_opened');
-}
-
-function openPlaceModal(){
-   popupPlace.classList.add('popup_opened');
-}
-
-
-function closeModal(evt){
-  console.log("working", evt.target.parentElement.parentElement);
-  evt.target.closest('.popup').classList.remove('popup_opened');
+function closeModal(element){
+  element.classList.remove('popup_opened');
 }
 
 
 
-function openPicture(evt){
+function openPicturePopup (evt){
     let imageLink = evt.target.src;
     let imageName = evt.target.alt;
     
     popupImage.setAttribute('src', imageLink);
-    popupImage.setAttribute('alt', imageName);
-    popupPictureCloseButton.addEventListener('click', closeModal);
+    popupImage.setAttribute('alt', imageName);    
     popupImageTitle.textContent = imageName;
     
-    openPictureModal();
+    openModal(popupForPlace);
 }
 
-function openPlacePopup () { 
-     popupPlaceCloseButton.addEventListener('click', closeModal);
-     popupFormPlace.addEventListener('submit', addPlace);
-     openPlaceModal();
-}
 
 function openProfilePopup () {
-    popupProfileCloseButton.addEventListener('click', closeModal);
+    
     popupInputs[0].value = profileName.textContent;
     popupInputs[1].value = profileFunction.textContent;
-    openProfileModal(); 
+    openModal(popupProfile); 
 };
 
-//add event listener to the new place button
-newPlaceButton.addEventListener('click', openPlacePopup);
 
-//add event listener to the profile change button
-editButton.addEventListener('click', openProfilePopup);
 
 
 
