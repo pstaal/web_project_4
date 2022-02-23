@@ -35,14 +35,26 @@
             <p class="footer__text">&copy; 2021 Around The U.S.</p>
         </footer>
     
-            <div class="popup">
+            <div class="popup popup-profile">
                 <div class="popup__container">
                     <button type="button" class="popup__close"><img src="images/popup_close_icon.svg" alt="close icon" class="popup__close-image"></button>
-                    <h3 class="popup__title"></h3>
-                    <form name="popupform" class="popup__form">
+                    <h3 class="popup__title">Edit Profile</h3>
+                    <form name="popupform" class="popup__form-profile">
                         <input required placeholder="name" name="name" class="popup__input" type="text">
                         <input required placeholder="function" name="function" class="popup__input" type="text">
-                        <button type="submit" class="popup__button"></button>
+                        <button type="submit" class="popup__button">Save</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="popup popup-place">
+                <div class="popup__container">
+                    <button type="button" class="popup__close"><img src="images/popup_close_icon.svg" alt="close icon" class="popup__close-image"></button>
+                    <h3 class="popup__title">New Place</h3>
+                    <form name="popupform" class="popup__form-place">
+                        <input required placeholder="Title" name="title" class="popup__input" type="text">
+                        <input required placeholder="Image URL" name="link" class="popup__input" type="text">
+                        <button type="submit" class="popup__button">Create</button>
                     </form>
                 </div>
             </div>
