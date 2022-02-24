@@ -18,6 +18,11 @@ const popupButton = document.querySelector('.popup__button');
 const popupInputs = document.querySelectorAll('.popup__input');
 const popupFormProfile = document.querySelector('.popup__form-profile');
 const popupFormPlace = document.querySelector('.popup__form-place');
+const nameInput = document.querySelector("[name='name']");
+const titleInput = document.querySelector("[name='function']");
+const placeTitleInput = document.querySelector("[name='title']");
+const placeUrlInput = document.querySelector("[name='link']");
+
 
 //initial cards for the page
 const initialCards = [
@@ -51,21 +56,22 @@ const initialCards = [
 function createCard(data) {
     const cardTemplate = document.querySelector('#card-template').content;
     const cardElement = cardTemplate.querySelector('.places__card').cloneNode(true);
-    cardElement.querySelector('.places__card-image').setAttribute("src", data.link);
+    const cardImage = cardElement.querySelector('.places__card-image');
+    cardImage.setAttribute("src", data.link);
     cardElement.querySelector('.places__card-title').textContent = data.name;
-    cardElement.querySelector('.places__card-image').setAttribute("alt", data.name);
+    cardImage.setAttribute("alt", data.name);
     //add event listener for likes
     cardElement.querySelector('.places__card-button').addEventListener('click', toggleHeart);
     //add event listener to remove card
     cardElement.querySelector('.places__card-delete-icon').addEventListener('click', removeCard);
     //add event listener to open picture
-    cardElement.querySelector('.places__card-image').addEventListener('click', openPicturePopup);
+    cardImage.addEventListener('click', openPicturePopup);
     return cardElement;
   } 
 
 //put all initial cards into the DOM
 initialCards.forEach((card) => {
-    let newCard = createCard(card);
+    const newCard = createCard(card);
     cardContainer.append(newCard);
 });
 
@@ -74,8 +80,8 @@ function editProfile(evt) {
     
     evt.preventDefault();
     
-    let newName = document.querySelector("[name='name']").value;
-    let newExpertise = document.querySelector("[name='function']").value;
+    const newName = nameInput.value;
+    const newExpertise = titleInput.value;
 
     profileName.textContent = newName;
     profileFunction.textContent = newExpertise;
@@ -90,10 +96,10 @@ function addPlace(evt) {
 
     evt.preventDefault();
 
-    let placeTitle = document.querySelector("[name='title']").value;
-    let placeURL = document.querySelector("[name='link']").value;
+    const placeTitle = placeTitleInput.value;
+    const placeURL = placeUrlInput.value;
 
-    let newCard = createCard({link: placeURL, name: placeTitle});
+    const newCard = createCard({link: placeURL, name: placeTitle});
     cardContainer.prepend(newCard);
 
      //close modal
@@ -139,8 +145,8 @@ function closeModal(element){
 
 
 function openPicturePopup (evt){
-    let imageLink = evt.target.src;
-    let imageName = evt.target.alt;
+    const imageLink = evt.target.src;
+    const imageName = evt.target.alt;
     
     popupImage.setAttribute('src', imageLink);
     popupImage.setAttribute('alt', imageName);    
@@ -152,8 +158,8 @@ function openPicturePopup (evt){
 
 function openProfilePopup () {
     
-    popupInputs[0].value = profileName.textContent;
-    popupInputs[1].value = profileFunction.textContent;
+    nameInput.value = profileName.textContent;
+    titleInput.value = profileFunction.textContent;
     openModal(popupProfile); 
 };
 
