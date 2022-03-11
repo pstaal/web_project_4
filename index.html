@@ -40,9 +40,9 @@
                     <button type="button" class="popup__close"></button>
                     <h3 class="popup__title">Edit Profile</h3>
                     <form name="popupform" class="popup__form-profile">
-                        <input id="name-input" required placeholder="name" name="name" class="popup__input" type="text">
+                        <input id="name-input" minlength="2" maxlength="40" required placeholder="name" name="name" class="popup__input" type="text">
                         <span class="name-input-error popup__input-error"></span>
-                        <input id="function-input" required placeholder="function" name="function" class="popup__input" type="text">
+                        <input id="function-input" minlength="2" maxlength="200" required placeholder="function" name="function" class="popup__input" type="text">
                         <span class="function-input-error popup__input-error"></span>
                         <button type="submit" class="popup__button">Save</button>
                     </form>
@@ -54,9 +54,9 @@
                     <button type="button" class="popup__close"></button>
                     <h3 class="popup__title">New Place</h3>
                     <form name="popupform" class="popup__form-place">
-                        <input id="title-input" required placeholder="Title" name="title" class="popup__input" type="text">
+                        <input id="title-input" minlength="1" maxlength="30" required placeholder="Title" name="title" class="popup__input" type="text">
                         <span class="title-input-error popup__input-error"></span>
-                        <input id="link-input" required placeholder="Image URL" name="link" class="popup__input" type="text">
+                        <input id="link-input" required placeholder="Image URL" name="link" class="popup__input" type="url">
                         <span class="link-input-error popup__input-error"></span>
                         <button type="submit" class="popup__button">Create</button>
                     </form>
