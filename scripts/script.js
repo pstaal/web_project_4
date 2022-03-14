@@ -1,3 +1,5 @@
+import resetValidation from "./validate";
+
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup-profile');
 const popupPlace = document.querySelector('.popup-place');
@@ -155,9 +157,11 @@ function openModal(element){
 }
 
 function closeModal(element){
+  console.log(element)
   element.classList.remove('popup_opened');
   document.removeEventListener("keydown", exitModalEscape);
   document.removeEventListener("click", exitModalClick);
+  resetValidation(element);
 }
 
 

@@ -1,7 +1,4 @@
-// enabling validation by calling enableValidation()
-// pass all the settings on call
-
-  const showInputError = (formElement, inputElement, errorMessage, settings) => {
+ const showInputError = (formElement, inputElement, errorMessage, settings) => {
     // Find the error message element inside the very function
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     // The rest remains unchanged
@@ -34,8 +31,6 @@
       buttonElement.disabled = false;
     }
   };
-  
-
 
   const isValid = (formElement, inputElement, settings) => {
     if (!inputElement.validity.valid) {
@@ -95,3 +90,15 @@
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible"
   }); 
+
+  export default resetValidation = (popup) => {
+    const errorSpans = Array.from(popup.querySelectorAll(".popup__input-error"));
+    errorSpans.forEach((errorSpan) => {
+        errorSpan.textContent = "";
+        errorSpan.classList.remove("popup__error_visible");
+    });
+    const inputs = Array.from(popup.querySelectorAll(".popup__input"));
+    inputs.forEach((input) => {
+        input.classList.remove("popup__input_type_error");
+    });
+  };
