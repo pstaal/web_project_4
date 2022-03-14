@@ -91,7 +91,7 @@
     errorClass: "popup__error_visible"
   }); 
 
-  function resetValidation (popup){
+  export function resetValidation (popup){
     const errorSpans = Array.from(popup.querySelectorAll(".popup__input-error"));
     errorSpans.forEach((errorSpan) => {
         errorSpan.textContent = "";
@@ -103,5 +103,3 @@
     });
   };
 
-
-  export { resetValidation };
