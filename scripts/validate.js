@@ -91,7 +91,7 @@
     errorClass: "popup__error_visible"
   }); 
 
-  export default resetValidation = (popup) => {
+  const resetValidation = (popup) => {
     const errorSpans = Array.from(popup.querySelectorAll(".popup__input-error"));
     errorSpans.forEach((errorSpan) => {
         errorSpan.textContent = "";
@@ -102,3 +102,6 @@
         input.classList.remove("popup__input_type_error");
     });
   };
+
+
+  export { resetValidation };
