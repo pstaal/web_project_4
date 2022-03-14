@@ -127,7 +127,7 @@ popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlac
 popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
 
 
-exitModalEscape = (evt) => {
+const exitModalEscape = (evt) => {
   if (evt.key ==="Escape") {
   const modal = document.querySelector(".popup_opened");
   closeModal(modal);
