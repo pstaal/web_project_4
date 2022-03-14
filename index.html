@@ -39,7 +39,7 @@
                 <div class="popup__container">
                     <button type="button" class="popup__close"></button>
                     <h3 class="popup__title">Edit Profile</h3>
-                    <form name="popupform" class="popup__form-profile">
+                    <form name="popupform" class="popup__form popup__form-profile">
                         <input id="name-input" minlength="2" maxlength="40" required placeholder="name" name="name" class="popup__input" type="text">
                         <span class="name-input-error popup__input-error"></span>
                         <input id="function-input" minlength="2" maxlength="200" required placeholder="function" name="function" class="popup__input" type="text">
@@ -53,11 +53,11 @@
                 <div class="popup__container">
                     <button type="button" class="popup__close"></button>
                     <h3 class="popup__title">New Place</h3>
-                    <form name="popupform" class="popup__form-place">
+                    <form name="popupform" class="popup__form popup__form-place">
                         <input id="title-input" minlength="1" maxlength="30" required placeholder="Title" name="title" class="popup__input" type="text">
-                        <span class="title-input-error popup__input-error">Please fill out this field</span>
+                        <span class="title-input-error popup__input-error"></span>
                         <input id="link-input" required placeholder="Image URL" name="link" class="popup__input" type="url">
-                        <span class="link-input-error popup__input-error">eeeeeeeeeee</span>
+                        <span class="link-input-error popup__input-error"></span>
                         <button type="submit" class="popup__button">Create</button>
                     </form>
                 </div>
@@ -83,5 +83,6 @@
             </li>
         </template>
         <script src="scripts/script.js"></script>
+        <script src="scripts/validate.js"></script>
     </body>
 </html>
