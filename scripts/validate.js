@@ -91,7 +91,7 @@
     errorClass: "popup__error_visible"
   }); 
 
-  const resetValidation = (popup) => {
+  function resetValidation (popup){
     const errorSpans = Array.from(popup.querySelectorAll(".popup__input-error"));
     errorSpans.forEach((errorSpan) => {
         errorSpan.textContent = "";
