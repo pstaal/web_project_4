@@ -151,13 +151,15 @@ function removeCard(evt){
 }
 
 function openModal(element){
+   const button = element.querySelector(".popup__button");
+   button.classList.add("popup__button_disabled");
+   button.disabled = true;
    element.classList.add('popup_opened');
    document.addEventListener("keydown", exitModalEscape);
    document.addEventListener("click", exitModalClick);
 }
 
 function closeModal(element){
-  console.log(element)
   element.classList.remove('popup_opened');
   document.removeEventListener("keydown", exitModalEscape);
   document.removeEventListener("click", exitModalClick);
