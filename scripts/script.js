@@ -125,6 +125,20 @@ popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlac
 popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
 
 
+exitModalEscape = (evt) => {
+  if (evt.key ==="Escape") {
+  const modal = document.querySelector(".popup_opened");
+  closeModal(modal);
+  }
+
+}
+
+exitModalClick = (evt) => {
+  if(evt.target === popupPlace || evt.target === popupProfile || evt.target === popupForPlace) {
+    const modal = document.querySelector(".popup_opened");
+    closeModal(modal);
+  }
+}
 
 function toggleHeart(evt){
     evt.target.classList.toggle('places__card-button-liked');
@@ -136,10 +150,14 @@ function removeCard(evt){
 
 function openModal(element){
    element.classList.add('popup_opened');
+   document.addEventListener("keydown", exitModalEscape);
+   document.addEventListener("click", exitModalClick);
 }
 
 function closeModal(element){
   element.classList.remove('popup_opened');
+  document.removeEventListener("keydown", exitModalEscape);
+  document.removeEventListener("click", exitModalClick);
 }
 
 
