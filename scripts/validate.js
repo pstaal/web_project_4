@@ -1,7 +1,7 @@
 // enabling validation by calling enableValidation()
 // pass all the settings on call
 
-  const showInputError = (formElement, inputElement, errorMessage,settings) => {
+  const showInputError = (formElement, inputElement, errorMessage, settings) => {
     // Find the error message element inside the very function
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     // The rest remains unchanged
@@ -19,7 +19,20 @@
     errorElement.textContent = "";
   }; 
 
+  const hasInvalidInput = (inputList) => {
+    return inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    });
+  };
 
+  const toggleButtonState = (inputList, buttonElement, settings) => {
+    if (hasInvalidInput(inputList)) {
+      buttonElement.classList.add(settings.inactiveButtonClass);
+    } else {
+      buttonElement.classList.remove(settings.inactiveButtonClass);
+    }
+  };
+  
 
 
   const isValid = (formElement, inputElement, settings) => {
@@ -38,6 +51,8 @@
     // Find all fields inside the form, and
     // make an array from them using the Array.from() method
     const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+    const buttonElement = formElement.querySelector(settings.submitButtonSelector);
+    
   
     // Iterate over the resulting array
     inputList.forEach((inputElement) => {
@@ -45,7 +60,8 @@
       inputElement.addEventListener("input", () => {
         // Call the isValid() function inside the callback,
         // and pass the form and the element to be checked to it
-        isValid(formElement, inputElement, settings)
+        isValid(formElement, inputElement, settings);
+        toggleButtonState(inputList, buttonElement, settings);
       });
     });
   }; 
