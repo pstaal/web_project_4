@@ -1,4 +1,4 @@
-import { resetValidation } from "./validate";
+import resetValidation  from "./validate";
 
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup-profile');
