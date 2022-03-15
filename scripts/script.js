@@ -142,6 +142,7 @@ function exitModalEscape(evt){
 }
 
 function exitModalClick(evt){
+  console.log(evt.target);
   if (evt.target.classList.contains('.popup_opened')) {
     closeModal(evt.target);
   }
