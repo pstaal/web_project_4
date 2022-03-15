@@ -175,16 +175,8 @@ function openPicturePopup (evt){
     openModal(popupForPlace);
 }
 
-function disableButton(element){
-  const button = element.querySelector(".popup__button");
-  button.classList.add("popup__button_disabled");
-  button.disabled = true;
-}
-
-
 function openProfilePopup () {
     resetValidation(popupProfile);  
-    disableButton(popupProfile);
     nameInput.value = profileName.textContent;
     titleInput.value = profileFunction.textContent;
     openModal(popupProfile); 
@@ -192,7 +184,6 @@ function openProfilePopup () {
 
 function openPlaceForm () {
   resetValidation(popupPlace);
-  disableButton(popupPlace);
   openModal(popupPlace);
 }
 
