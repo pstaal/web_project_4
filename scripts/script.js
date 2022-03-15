@@ -158,7 +158,7 @@ function removeCard(evt){
 function openModal(element){
    element.classList.add('popup_opened');
    document.addEventListener("keydown", exitModalEscape);
-   document.addEventListener("mousedown", exitModalClick);
+   document.addEventListener("click", exitModalClick);
 }
 
 function closeModal(element){
