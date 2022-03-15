@@ -135,16 +135,15 @@ popupProfileCloseButton.addEventListener('click', function() {closeModal(popupPr
 
 function exitModalEscape(evt){
   if (evt.key ==="Escape") {
-    const modal = document.querySelector(".popup_opened");
-    closeModal(modal);
+    closeModal(document.querySelector(".popup_opened"));
   }
 
 }
 
 function exitModalClick(evt){
   console.log(evt.target);
-  if (evt.target.classList.contains('.popup_opened')) {
-    closeModal(evt.target);
+  if (!evt.target.classList.contains('popup') && document.querySelector(".popup_opened")) {
+    closeModal(document.querySelector(".popup_opened"));
   }
 }
 
