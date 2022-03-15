@@ -25,6 +25,7 @@
   };
 
   const toggleButtonState = (inputList, buttonElement, settings) => {
+    console.log(hasInvalidInput(inputList));
     if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(settings.inactiveButtonClass);
       buttonElement.disabled = true;
@@ -50,7 +51,6 @@
     // Find all fields inside the form, and
     // make an array from them using the Array.from() method
     const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
-    console.log(inputList);
     const buttonElement = formElement.querySelector(settings.submitButtonSelector);
     
   
