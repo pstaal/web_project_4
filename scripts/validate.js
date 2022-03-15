@@ -25,7 +25,6 @@
   };
 
   const toggleButtonState = (inputList, buttonElement, settings) => {
-    console.log(hasInvalidInput(inputList));
     if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(settings.inactiveButtonClass);
       buttonElement.disabled = true;
@@ -94,7 +93,7 @@
     errorClass: "popup__error_visible"
   }); 
 
-  export function resetValidation (popup){
+ export function resetValidation (popup){
     const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
     const form = popup.querySelector(".popup__form");
     inputElements.forEach((inputElement) => {
@@ -102,4 +101,5 @@
         errorClass: "popup__error_visible"});
     });
   };
+
 

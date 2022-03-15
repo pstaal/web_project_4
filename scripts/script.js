@@ -163,10 +163,8 @@ function openModal(element){
 function closeModal(element){
   element.classList.remove('popup_opened');
   document.removeEventListener("keydown", exitModalEscape);
-  document.removeEventListener("mousedown", exitModalClick);
+  document.removeEventListener("click", exitModalClick);
 }
-
-
 
 function openPicturePopup (evt){
     const imageLink = evt.target.src;
