@@ -2,6 +2,7 @@
     position: absolute;
     top: 18px;
     right: 15px;
+    cursor: pointer;
 }
 
 .places__card-delete-icon:hover {

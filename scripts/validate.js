@@ -7,7 +7,7 @@
     errorElement.classList.add(settings.errorClass);
   };
   
-  const hideInputError = (formElement, inputElement,settings) => {
+  const hideInputError = (formElement, inputElement, settings) => {
     // Find the error message element
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     // The rest remains unchanged
@@ -17,9 +17,7 @@
   }; 
 
   const hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
-    });
+    inputList.some((input) => !input.validity.valid);
   };
 
   const toggleButtonState = (inputList, buttonElement, settings) => {
@@ -32,7 +30,7 @@
     }
   };
 
-  const isValid = (formElement, inputElement, settings) => {
+  const toggleInputError = (formElement, inputElement, settings) => {
     if (!inputElement.validity.valid) {
       // The parameter of showInputError() is now a form,
       // which contains a field to be checked
@@ -47,7 +45,7 @@
   const setEventListeners = (formElement, settings) => {
     // Find all fields inside the form, and
     // make an array from them using the Array.from() method
-    const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+    const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
     const buttonElement = formElement.querySelector(settings.submitButtonSelector);
     
   
@@ -55,9 +53,9 @@
     inputList.forEach((inputElement) => {
       // add the input event handler to each field
       inputElement.addEventListener("input", () => {
-        // Call the isValid() function inside the callback,
+        // Call the toggleInputError() function inside the callback,
         // and pass the form and the element to be checked to it
-        isValid(formElement, inputElement, settings);
+        toggleInputError(formElement, inputElement, settings);
         toggleButtonState(inputList, buttonElement, settings);
       });
     });
@@ -92,14 +90,11 @@
   }); 
 
   export function resetValidation (popup){
-    const errorSpans = Array.from(popup.querySelectorAll(".popup__input-error"));
-    errorSpans.forEach((errorSpan) => {
-        errorSpan.textContent = "";
-        errorSpan.classList.remove("popup__error_visible");
-    });
-    const inputs = Array.from(popup.querySelectorAll(".popup__input"));
-    inputs.forEach((input) => {
-        input.classList.remove("popup__input_type_error");
+    const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
+    const form = popup.querySelector(".popup__form");
+    inputElements.forEach((inputElement) => {
+        hideInputError(form, inputElement, {inputErrorClass: "popup__input_type_error",
+        errorClass: "popup__error_visible"});
     });
   };
 

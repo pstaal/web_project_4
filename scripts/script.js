@@ -88,6 +88,9 @@ function editProfile(evt) {
     profileName.textContent = newName;
     profileFunction.textContent = newExpertise;
 
+     // reset form
+     popupProfile.reset();
+
     //close modal
     closeModal(popupProfile);
 }
@@ -104,6 +107,9 @@ function addPlace(evt) {
     const newCard = createCard({link: placeURL, name: placeTitle});
     cardContainer.prepend(newCard);
 
+    // reset form
+    popupFormPlace.reset();
+
      //close modal
     closeModal(popupPlace);
 }
@@ -113,7 +119,7 @@ function addPlace(evt) {
 popupFormProfile.addEventListener('submit', editProfile);
 
 //add event listener to open the form for a new place card
-newPlaceButton.addEventListener('click', function(){openModal(popupPlace)});
+newPlaceButton.addEventListener('click', openPlaceForm);
 
 //add event listener to open the form for the profile
 editButton.addEventListener('click', openProfilePopup);
@@ -129,16 +135,15 @@ popupProfileCloseButton.addEventListener('click', function() {closeModal(popupPr
 
 function exitModalEscape(evt){
   if (evt.key ==="Escape") {
-  const modal = document.querySelector(".popup_opened");
-  closeModal(modal);
+    const modal = document.querySelector(".popup_opened");
+    closeModal(modal);
   }
 
 }
 
 function exitModalClick(evt){
-  if(evt.target === popupPlace || evt.target === popupProfile || evt.target === popupForPlace) {
-    const modal = document.querySelector(".popup_opened");
-    closeModal(modal);
+  if (evt.target.classList.contains('.popup_opened')) {
+    closeModal(evt.target);
   }
 }
 
@@ -151,19 +156,15 @@ function removeCard(evt){
 }
 
 function openModal(element){
-   const button = element.querySelector(".popup__button");
-   button.classList.add("popup__button_disabled");
-   button.disabled = true;
    element.classList.add('popup_opened');
    document.addEventListener("keydown", exitModalEscape);
-   document.addEventListener("click", exitModalClick);
+   document.addEventListener("mousedown", exitModalClick);
 }
 
 function closeModal(element){
   element.classList.remove('popup_opened');
   document.removeEventListener("keydown", exitModalEscape);
-  document.removeEventListener("click", exitModalClick);
-  resetValidation(element);
+  document.removeEventListener("mousedown", exitModalClick);
 }
 
 
@@ -171,22 +172,32 @@ function closeModal(element){
 function openPicturePopup (evt){
     const imageLink = evt.target.src;
     const imageName = evt.target.alt;
-    
     popupImage.setAttribute('src', imageLink);
     popupImage.setAttribute('alt', imageName);    
     popupImageTitle.textContent = imageName;
-    
     openModal(popupForPlace);
+}
+
+function disableButton(element){
+  const button = element.querySelector(".popup__button");
+  button.classList.add("popup__button_disabled");
+  button.disabled = true;
 }
 
 
 function openProfilePopup () {
-    
+    resetValidation(popupProfile);  
+    disableButton(popupProfile);
     nameInput.value = profileName.textContent;
     titleInput.value = profileFunction.textContent;
     openModal(popupProfile); 
-};
+}
 
+function openPlaceForm () {
+  resetValidation(popupPlace);
+  disableButton(popupPlace);
+  openModal(popupPlace);
+}
 
 
 
