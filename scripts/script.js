@@ -89,7 +89,7 @@ function editProfile(evt) {
     profileFunction.textContent = newExpertise;
 
      // reset form
-     popupProfile.reset();
+     popupFormProfile.reset();
 
     //close modal
     closeModal(popupProfile);
