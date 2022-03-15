@@ -142,7 +142,7 @@ function exitModalEscape(evt){
 
 function exitModalClick(evt){
   console.log(evt.target);
-  if (!evt.target.classList.contains('popup') && document.querySelector(".popup_opened")) {
+  if (evt.target.classList.contains('popup') && document.querySelector(".popup_opened")) {
     closeModal(document.querySelector(".popup_opened"));
   }
 }
