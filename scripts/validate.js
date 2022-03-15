@@ -46,6 +46,7 @@
     // Find all fields inside the form, and
     // make an array from them using the Array.from() method
     const inputList = [...formElement.querySelectorAll(settings.inputSelector)];
+    console.log(inputList);
     const buttonElement = formElement.querySelector(settings.submitButtonSelector);
     
   
