@@ -58,8 +58,8 @@ const initialCards = [
 
 //put all initial cards into the DOM
 initialCards.forEach((card) => {
-    new Card({text: card.name, imageLink: card.link}, "#card-template")
-    let element = Card.generateCard();
+    let newCard = new Card({text: card.name, imageLink: card.link}, "#card-template");
+    let element = newCard.generateCard();
     cardContainer.append(element);
 });
 
