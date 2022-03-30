@@ -1,4 +1,5 @@
 import { resetValidation }  from "./validate.js";
+import Card from "./Card.js";
 
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup-profile');
@@ -54,27 +55,12 @@ const initialCards = [
     }
   ]; 
 
-//create a card function 
-function createCard(data) {
-    const cardTemplate = document.querySelector('#card-template').content;
-    const cardElement = cardTemplate.querySelector('.places__card').cloneNode(true);
-    const cardImage = cardElement.querySelector('.places__card-image');
-    cardImage.setAttribute("src", data.link);
-    cardElement.querySelector('.places__card-title').textContent = data.name;
-    cardImage.setAttribute("alt", data.name);
-    //add event listener for likes
-    cardElement.querySelector('.places__card-button').addEventListener('click', toggleHeart);
-    //add event listener to remove card
-    cardElement.querySelector('.places__card-delete-icon').addEventListener('click', removeCard);
-    //add event listener to open picture
-    cardImage.addEventListener('click', openPicturePopup);
-    return cardElement;
-  } 
 
 //put all initial cards into the DOM
 initialCards.forEach((card) => {
-    const newCard = createCard(card);
-    cardContainer.append(newCard);
+    new Card({text: card.name, imageLink: card.link}, "#card-template")
+    let element = Card.generateCard();
+    cardContainer.append(element);
 });
 
 //change the profile name and function
@@ -104,7 +90,7 @@ function addPlace(evt) {
     const placeTitle = placeTitleInput.value;
     const placeURL = placeUrlInput.value;
 
-    const newCard = createCard({link: placeURL, name: placeTitle});
+    const newCard = new Card({text: placeTitle, imageLink: placeURL}, "#card-template").generateCard();
     cardContainer.prepend(newCard);
 
     // reset form
@@ -146,14 +132,6 @@ function exitModalClick(evt){
   }
 }
 
-function toggleHeart(evt){
-    evt.target.classList.toggle('places__card-button-liked');
-}
-
-function removeCard(evt){
-    evt.target.parentElement.remove();
-}
-
 function openModal(element){
    element.classList.add('popup_opened');
    document.addEventListener("keydown", exitModalEscape);
@@ -164,15 +142,6 @@ function closeModal(element){
   element.classList.remove('popup_opened');
   document.removeEventListener("keydown", exitModalEscape);
   document.removeEventListener("click", exitModalClick);
-}
-
-function openPicturePopup (evt){
-    const imageLink = evt.target.src;
-    const imageName = evt.target.alt;
-    popupImage.setAttribute('src', imageLink);
-    popupImage.setAttribute('alt', imageName);    
-    popupImageTitle.textContent = imageName;
-    openModal(popupForPlace);
 }
 
 function openProfilePopup () {
