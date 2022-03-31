@@ -22,7 +22,6 @@ const popupButton = document.querySelector('.popup__button');
 const popupInputs = document.querySelectorAll('.popup__input');
 const popupFormProfile = document.querySelector('.popup__form-profile');
 const popupFormPlace = document.querySelector('.popup__form-place');
-const popupForPlace = document.querySelector('.popup-picture');
 const nameInput = document.querySelector("[name='name']");
 const titleInput = document.querySelector("[name='function']");
 const placeTitleInput = document.querySelector("[name='title']");
