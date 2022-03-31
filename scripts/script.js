@@ -139,27 +139,30 @@ popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlac
 popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
 popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
 
+
+function openProfilePopup () {
+  resetValidation(popupProfile);  
+  nameInput.value = profileName.textContent;
+  titleInput.value = profileFunction.textContent;
+  openModal(popupProfile); 
+}
+
+function openPlaceForm () {
+resetValidation(popupPlace);
+openModal(popupPlace);
+}
+
 function resetValidation (popup){
   const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
   const form = popup.querySelector(".popup__form");
   inputElements.forEach((inputElement) => {
-      hideInputError(form, inputElement, {inputErrorClass: "popup__input_type_error",
-      errorClass: "popup__error_visible"});
+    const errorElement = form.querySelector(`.${inputElement.id}-error`);
+        // The rest remains unchanged
+        inputElement.classList.remove("popup__input_type_error");
+        errorElement.classList.remove("popup__error_visible");
+        errorElement.textContent = "";  
   });
 };
-
-
-function openProfilePopup () {
-    resetValidation(popupProfile);  
-    nameInput.value = profileName.textContent;
-    titleInput.value = profileFunction.textContent;
-    openModal(popupProfile); 
-}
-
-function openPlaceForm () {
-  resetValidation(popupPlace);
-  openModal(popupPlace);
-}
 
 
 

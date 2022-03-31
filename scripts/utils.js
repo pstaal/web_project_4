@@ -12,6 +12,8 @@ function exitModalClick(evt){
   }
 
 
+
+
 // open modal
 
 function openModal(element){
