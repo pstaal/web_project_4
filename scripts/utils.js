@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+
 const popupProfile = document.querySelector('.popup-profile');
 const popupPlace = document.querySelector('.popup-place');
 const profileName = document.querySelector('.profile__name');
