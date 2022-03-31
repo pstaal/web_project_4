@@ -1,6 +1,6 @@
 import { resetValidation }  from "./validate.js";
 import Card from "./Card.js";
-import { openModal, closeModal } from "./utils";
+import { openModal, closeModal } from "./utils.js";
 
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup-profile');
