@@ -1,8 +1,8 @@
 import { FormValidator } from "./FormValidator.js";
 import Card from "./Card.js";
-import { openModal, closeModal, editProfile, addPlace, openProfilePopup, openPlaceForm } from "./utils.js";
+import { closeModal, editProfile, addPlace, openProfilePopup, openPlaceForm } from "./utils.js";
 
-const popup = document.querySelector('.popup');
+
 const popupProfile = document.querySelector('.popup-profile');
 const popupPlace = document.querySelector('.popup-place');
 const popupForPlace = document.querySelector('.popup-picture');
@@ -89,17 +89,7 @@ popupProfileCloseButton.addEventListener('click', function() {closeModal(popupPr
 popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
 
 
-function resetValidation (popup){
-  const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
-  const form = popup.querySelector(".popup__form");
-  inputElements.forEach((inputElement) => {
-    const errorElement = form.querySelector(`.${inputElement.id}-error`);
-        // The rest remains unchanged
-        inputElement.classList.remove("popup__input_type_error");
-        errorElement.classList.remove("popup__error_visible");
-        errorElement.textContent = "";  
-  });
-};
+
 
 
 

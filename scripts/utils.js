@@ -5,6 +5,7 @@ const profileFunction = document.querySelector('.profile__function');
 const popupFormProfile = document.querySelector('.popup__form-profile');
 const popupFormPlace = document.querySelector('.popup__form-place');
 const cardContainer = document.querySelector('.places');
+const popup = document.querySelector('.popup');
 
 function exitModalEscape(evt){
     if (evt.key ==="Escape") {
@@ -19,7 +20,17 @@ function exitModalClick(evt){
     }
   }
 
-
+  function resetValidation (popup){
+    const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
+    const form = popup.querySelector(".popup__form");
+    inputElements.forEach((inputElement) => {
+      const errorElement = form.querySelector(`.${inputElement.id}-error`);
+          // The rest remains unchanged
+          inputElement.classList.remove("popup__input_type_error");
+          errorElement.classList.remove("popup__error_visible");
+          errorElement.textContent = "";  
+    });
+  };
 
 
 // open modal
