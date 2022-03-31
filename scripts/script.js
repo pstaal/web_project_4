@@ -133,12 +133,6 @@ function exitModalClick(evt){
   }
 }
 
-function openModal(element){
-   element.classList.add('popup_opened');
-   document.addEventListener("keydown", exitModalEscape);
-   document.addEventListener("click", exitModalClick);
-}
-
 function openProfilePopup () {
     resetValidation(popupProfile);  
     nameInput.value = profileName.textContent;
