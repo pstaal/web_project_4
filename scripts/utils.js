@@ -6,6 +6,11 @@ const popupFormProfile = document.querySelector('.popup__form-profile');
 const popupFormPlace = document.querySelector('.popup__form-place');
 const cardContainer = document.querySelector('.places');
 const popup = document.querySelector('.popup');
+const nameInput = document.querySelector("[name='name']"); 
+const titleInput = document.querySelector("[name='function']"); 
+const placeTitleInput = document.querySelector("[name='title']"); 
+const placeUrlInput = document.querySelector("[name='link']"); 
+
 
 function exitModalEscape(evt){
     if (evt.key ==="Escape") {
