@@ -22,6 +22,7 @@ const popupButton = document.querySelector('.popup__button');
 const popupInputs = document.querySelectorAll('.popup__input');
 const popupFormProfile = document.querySelector('.popup__form-profile');
 const popupFormPlace = document.querySelector('.popup__form-place');
+const popupForPlace = document.querySelector('.popup-picture');
 const nameInput = document.querySelector("[name='name']");
 const titleInput = document.querySelector("[name='function']");
 const placeTitleInput = document.querySelector("[name='title']");
@@ -118,6 +119,8 @@ popupFormPlace.addEventListener('submit', addPlace);
 
 popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlace)});
 popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
+popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
+
 
 
 function openProfilePopup () {

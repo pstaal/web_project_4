@@ -2,7 +2,6 @@ import { openModal, closeModal } from "./utils.js";
 
 const popupImage = document.querySelector('.popup-picture__image');
 const popupImageTitle = document.querySelector('.popup-picture__title');
-const popupForPlace = document.querySelector('.popup-picture');
  
 
 export default class Card {
@@ -35,10 +34,6 @@ export default class Card {
         popupImageTitle.textContent = imageName;
         openModal(popupForPlace);
     }
- 
-    _closePicturePopup (){
-        closeModal(popupForPlace);
-    }
    
 
 
@@ -51,9 +46,6 @@ export default class Card {
           });
           this._element.querySelector(".places__card-image").addEventListener("click", (evt) => {
             this._openPicturePopup(evt);
-          });
-          this._element.querySelector(".popup__close").addEventListener("click", () => {
-            this._closePicturePopup();
           });
     }
 
