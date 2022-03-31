@@ -1,6 +1,6 @@
 import { FormValidator } from "./FormValidator.js";
 import Card from "./Card.js";
-import { openModal, closeModal } from "./utils.js";
+import { openModal, closeModal, editProfile, addPlace, openProfilePopup, openPlaceForm } from "./utils.js";
 
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup-profile');
@@ -10,22 +10,10 @@ const editButton = document.querySelector('.profile__button-name-change');
 const popupProfileCloseButton = popupProfile.querySelector('.popup__close');
 const popupPlaceCloseButton = popupPlace.querySelector('.popup__close');
 const popupPictureCloseButton = popupForPlace.querySelector('.popup__close');
-const profileName = document.querySelector('.profile__name');
-const profileFunction = document.querySelector('.profile__function');
 const cardContainer = document.querySelector('.places');
 const newPlaceButton = document.querySelector('.profile__button-add-place');
-const bodyPage = document.querySelector('.page');
-const popupImage = document.querySelector('.popup-picture__image');
-const popupImageTitle = document.querySelector('.popup-picture__title');
-const popupTitle = document.querySelector('.popup__title');
-const popupButton = document.querySelector('.popup__button');
-const popupInputs = document.querySelectorAll('.popup__input');
 const popupFormProfile = document.querySelector('.popup__form-profile');
 const popupFormPlace = document.querySelector('.popup__form-place');
-const nameInput = document.querySelector("[name='name']");
-const titleInput = document.querySelector("[name='function']");
-const placeTitleInput = document.querySelector("[name='title']");
-const placeUrlInput = document.querySelector("[name='link']");
 
 
 //initial cards for the page
@@ -82,45 +70,6 @@ new FormValidator({
   errorClass: "popup__error_visible"
 }, ".popup__form-place").enableValidation();
 
-
-//change the profile name and function
-function editProfile(evt) {
-    
-    evt.preventDefault();
-    
-    const newName = nameInput.value;
-    const newExpertise = titleInput.value;
-
-    profileName.textContent = newName;
-    profileFunction.textContent = newExpertise;
-
-     // reset form
-     popupFormProfile.reset();
-
-    //close modal
-    closeModal(popupProfile);
-}
-
-
-//add a new place to the list
-function addPlace(evt) {
-
-    evt.preventDefault();
-
-    const placeTitle = placeTitleInput.value;
-    const placeURL = placeUrlInput.value;
-
-    const newCard = new Card({text: placeTitle, imageLink: placeURL}, "#card-template").generateCard();
-    cardContainer.prepend(newCard);
-
-    // reset form
-    popupFormPlace.reset();
-
-     //close modal
-    closeModal(popupPlace);
-}
-
-
 //add event listeners to submit the form for profile
 popupFormProfile.addEventListener('submit', editProfile);
 
@@ -139,18 +88,6 @@ popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlac
 popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
 popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
 
-
-function openProfilePopup () {
-  resetValidation(popupProfile);  
-  nameInput.value = profileName.textContent;
-  titleInput.value = profileFunction.textContent;
-  openModal(popupProfile); 
-}
-
-function openPlaceForm () {
-resetValidation(popupPlace);
-openModal(popupPlace);
-}
 
 function resetValidation (popup){
   const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
