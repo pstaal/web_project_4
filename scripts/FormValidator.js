@@ -21,14 +21,14 @@ export class FormValidator {
         errorElement.classList.add(settings.errorClass);
       }
       
-    _hideInputError = (form, inputElement ) {
+    _hideInputError (form, inputElement ) {
         // Find the error message element
         const errorElement = form.querySelector(`.${inputElement.id}-error`);
         // The rest remains unchanged
         inputElement.classList.remove(this._settings.inputErrorClass);
         errorElement.classList.remove(this._settings.errorClass);
         errorElement.textContent = "";
-      }; 
+      }
 
     _toggleButtonState (inputList, buttonElement) {
         if (this._hasInvalidInput(inputList)) {
