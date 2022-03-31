@@ -1,4 +1,4 @@
-import { resetValidation }  from "./validate.js";
+import { FormValidator } from "./FormValidator.js";
 import Card from "./Card.js";
 import { openModal, closeModal } from "./utils.js";
 
@@ -64,6 +64,25 @@ initialCards.forEach((card) => {
     cardContainer.append(element);
 });
 
+//enable form validation
+
+new FormValidator({
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+}, ".popup__form-profile").enableValidation();
+
+new FormValidator({
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+}, ".popup__form-place").enableValidation();
+
+
 //change the profile name and function
 function editProfile(evt) {
     
@@ -120,6 +139,14 @@ popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlac
 popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
 popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
 
+function resetValidation (popup){
+  const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
+  const form = popup.querySelector(".popup__form");
+  inputElements.forEach((inputElement) => {
+      hideInputError(form, inputElement, {inputErrorClass: "popup__input_type_error",
+      errorClass: "popup__error_visible"});
+  });
+};
 
 
 function openProfilePopup () {

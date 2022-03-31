@@ -84,16 +84,16 @@
     });
   };
 
-  enableValidation({
-    formSelector: ".popup__form",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__button",
-    inactiveButtonClass: "popup__button_disabled",
-    inputErrorClass: "popup__input_type_error",
-    errorClass: "popup__error_visible"
-  }); 
+  // enableValidation({
+  //   formSelector: ".popup__form",
+  //   inputSelector: ".popup__input",
+  //   submitButtonSelector: ".popup__button",
+  //   inactiveButtonClass: "popup__button_disabled",
+  //   inputErrorClass: "popup__input_type_error",
+  //   errorClass: "popup__error_visible"
+  // }); 
 
- export function resetValidation (popup){
+function resetValidation (popup){
     const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
     const form = popup.querySelector(".popup__form");
     inputElements.forEach((inputElement) => {
