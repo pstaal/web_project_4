@@ -1,3 +1,17 @@
+function exitModalEscape(evt){
+    if (evt.key ==="Escape") {
+      closeModal(document.querySelector(".popup_opened"));
+    }
+  }
+
+  
+function exitModalClick(evt){
+    if (evt.target.classList.contains('popup') && document.querySelector(".popup_opened")) {
+      closeModal(document.querySelector(".popup_opened"));
+    }
+  }
+
+
 // open modal
 
 function openModal(element){
