@@ -1,3 +1,13 @@
+function openModal(element){
+    element.classList.add('popup_opened');
+    document.addEventListener("keydown", exitModalEscape);
+    document.addEventListener("click", exitModalClick);
+ }
+
+const popupImage = document.querySelector('.popup-picture__image');
+const popupImageTitle = document.querySelector('.popup-picture__title');
+ 
+
 export default class Card {
 
     constructor(data, cardSelector) {
