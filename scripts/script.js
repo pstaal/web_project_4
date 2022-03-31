@@ -1,5 +1,6 @@
 import { resetValidation }  from "./validate.js";
 import Card from "./Card.js";
+import { openModal, closeModal } from "./utils";
 
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup-profile');
@@ -114,7 +115,7 @@ editButton.addEventListener('click', openProfilePopup);
 popupFormPlace.addEventListener('submit', addPlace);
 
 // add eventlisteners to the three modals
-popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
+
 popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlace)});
 popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
 
@@ -136,12 +137,6 @@ function openModal(element){
    element.classList.add('popup_opened');
    document.addEventListener("keydown", exitModalEscape);
    document.addEventListener("click", exitModalClick);
-}
-
-function closeModal(element){
-  element.classList.remove('popup_opened');
-  document.removeEventListener("keydown", exitModalEscape);
-  document.removeEventListener("click", exitModalClick);
 }
 
 function openProfilePopup () {
