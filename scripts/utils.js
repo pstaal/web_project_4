@@ -26,18 +26,6 @@ function exitModalClick(evt){
     }
   }
 
-  function resetValidation (popup){
-    const inputElements = Array.from(popup.querySelectorAll(".popup__input"));
-    const form = popup.querySelector(".popup__form");
-    inputElements.forEach((inputElement) => {
-      const errorElement = form.querySelector(`.${inputElement.id}-error`);
-          // The rest remains unchanged
-          inputElement.classList.remove("popup__input_type_error");
-          errorElement.classList.remove("popup__error_visible");
-          errorElement.textContent = "";  
-    });
-  };
-
 
 // open modal
 
@@ -92,16 +80,6 @@ function addPlace(evt) {
     closeModal(popupPlace);
 }
 
-function openProfilePopup () {
-    resetValidation(popupProfile);  
-    nameInput.value = profileName.textContent;
-    titleInput.value = profileFunction.textContent;
-    openModal(popupProfile); 
-  }
-  
-  function openPlaceForm () {
-  resetValidation(popupPlace);
-  openModal(popupPlace);
-  }
 
-export { openModal, closeModal, editProfile, addPlace, openProfilePopup, openPlaceForm };
+
+export { openModal, closeModal, editProfile, addPlace, nameInput, titleInput, profileName, profileFunction};

@@ -72,7 +72,20 @@ export default class FormValidator {
       });
     });
 
-   }
+  }
+
+  resetValidation (popup){ 
+
+    const inputElements = Array.from(popup.querySelectorAll(".popup__input")); 
+    const form = document.querySelector(this._form);
+
+    inputElements.forEach((inputElement) => { 
+
+        this._hideInputError(form, inputElement); 
+
+    }); 
+
+  }; 
 
    enableValidation() {
         const form = document.querySelector(this._form);

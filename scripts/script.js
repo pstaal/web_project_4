@@ -1,6 +1,6 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
-import { closeModal, editProfile, addPlace, openProfilePopup, openPlaceForm } from "./utils.js";
+import { closeModal, openModal, editProfile, addPlace, nameInput, titleInput, profileName, profileFunction} from "./utils.js";
 
 
 const popupProfile = document.querySelector('.popup-profile');
@@ -54,21 +54,25 @@ initialCards.forEach((card) => {
 
 //enable form validation
 
-new FormValidator({
+const profileValidator = new FormValidator({
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
-}, ".popup__form-profile").enableValidation();
+}, ".popup__form-profile");
 
-new FormValidator({
+profileValidator.enableValidation();
+
+const placeValidator = new FormValidator({
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
-}, ".popup__form-place").enableValidation();
+}, ".popup__form-place");
+
+placeValidator.enableValidation();
 
 //add event listeners to submit the form for profile
 popupFormProfile.addEventListener('submit', editProfile);
@@ -89,8 +93,17 @@ popupProfileCloseButton.addEventListener('click', function() {closeModal(popupPr
 popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
 
 
+function openProfilePopup () {
+  profileValidator.resetValidation(popupProfile);  
+  nameInput.value = profileName.textContent;
+  titleInput.value = profileFunction.textContent;
+  openModal(popupProfile); 
+}
 
-
+function openPlaceForm () {
+placeValidator.resetValidation(popupPlace);
+openModal(popupPlace);
+}
 
 
 
