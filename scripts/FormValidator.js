@@ -1,3 +1,4 @@
+
 export default class FormValidator {
     constructor(settings, form) {
         this._settings = settings;
@@ -57,9 +58,9 @@ export default class FormValidator {
         // Cancel default behavior for the form
         evt.preventDefault();
     });
+
     const inputList = [...form.querySelectorAll(this._settings.inputSelector)];
     const buttonElement = form.querySelector(this._settings.submitButtonSelector);
-    
   
     // Iterate over the resulting array
     inputList.forEach((inputElement) => {

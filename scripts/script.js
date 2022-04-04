@@ -1,6 +1,6 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
-import { closeModal, openModal, editProfile, addPlace, nameInput, titleInput, profileName, profileFunction} from "./utils.js";
+import { closeModal, openModal } from "./utils.js";
 
 
 const popupProfile = document.querySelector('.popup-profile');
@@ -14,6 +14,12 @@ const cardContainer = document.querySelector('.places');
 const newPlaceButton = document.querySelector('.profile__button-add-place');
 const popupFormProfile = document.querySelector('.popup__form-profile');
 const popupFormPlace = document.querySelector('.popup__form-place');
+const profileName = document.querySelector('.profile__name');
+const profileFunction = document.querySelector('.profile__function');
+const nameInput = document.querySelector("[name='name']"); 
+const titleInput = document.querySelector("[name='function']"); 
+const placeTitleInput = document.querySelector("[name='title']"); 
+const placeUrlInput = document.querySelector("[name='link']"); 
 
 
 //initial cards for the page
@@ -44,11 +50,13 @@ const initialCards = [
     }
   ]; 
 
+  export function renderCard(settingsObject, template) {
+    return new Card(settingsObject, template).generateCard();
+  }
 
 //put all initial cards into the DOM
 initialCards.forEach((card) => {
-    let newCard = new Card({text: card.name, imageLink: card.link}, "#card-template");
-    let element = newCard.generateCard();
+    const element = renderCard({text: card.name, imageLink: card.link}, "#card-template");
     cardContainer.append(element);
 });
 
@@ -105,5 +113,41 @@ placeValidator.resetValidation(popupPlace);
 openModal(popupPlace);
 }
 
+//change the profile name and function
+function editProfile(evt) {
+    
+  evt.preventDefault();
+  
+  const newName = nameInput.value;
+  const newExpertise = titleInput.value;
+
+  profileName.textContent = newName;
+  profileFunction.textContent = newExpertise;
+
+   // reset form
+   popupFormProfile.reset();
+
+  //close modal
+  closeModal(popupProfile);
+}
+
+
+//add a new place to the list
+function addPlace(evt) {
+
+  evt.preventDefault();
+
+  const placeTitle = placeTitleInput.value;
+  const placeURL = placeUrlInput.value;
+
+  const newCard = renderCard({text: placeTitle, imageLink: placeURL}, "#card-template");
+  cardContainer.prepend(newCard);
+
+  // reset form
+  popupFormPlace.reset();
+
+   //close modal
+  closeModal(popupPlace);
+}
 
 

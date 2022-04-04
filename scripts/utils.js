@@ -1,18 +1,3 @@
-import Card from "./Card.js";
-
-const popupProfile = document.querySelector('.popup-profile');
-const popupPlace = document.querySelector('.popup-place');
-const profileName = document.querySelector('.profile__name');
-const profileFunction = document.querySelector('.profile__function');
-const popupFormProfile = document.querySelector('.popup__form-profile');
-const popupFormPlace = document.querySelector('.popup__form-place');
-const cardContainer = document.querySelector('.places');
-const nameInput = document.querySelector("[name='name']"); 
-const titleInput = document.querySelector("[name='function']"); 
-const placeTitleInput = document.querySelector("[name='title']"); 
-const placeUrlInput = document.querySelector("[name='link']"); 
-
-
 function exitModalEscape(evt){
     if (evt.key ==="Escape") {
       closeModal(document.querySelector(".popup_opened"));
@@ -43,43 +28,5 @@ function closeModal(element){
     document.removeEventListener("click", exitModalClick);
 }
 
-//change the profile name and function
-function editProfile(evt) {
-    
-    evt.preventDefault();
-    
-    const newName = nameInput.value;
-    const newExpertise = titleInput.value;
 
-    profileName.textContent = newName;
-    profileFunction.textContent = newExpertise;
-
-     // reset form
-     popupFormProfile.reset();
-
-    //close modal
-    closeModal(popupProfile);
-}
-
-
-//add a new place to the list
-function addPlace(evt) {
-
-    evt.preventDefault();
-
-    const placeTitle = placeTitleInput.value;
-    const placeURL = placeUrlInput.value;
-
-    const newCard = new Card({text: placeTitle, imageLink: placeURL}, "#card-template").generateCard();
-    cardContainer.prepend(newCard);
-
-    // reset form
-    popupFormPlace.reset();
-
-     //close modal
-    closeModal(popupPlace);
-}
-
-
-
-export { openModal, closeModal, editProfile, addPlace, nameInput, titleInput, profileName, profileFunction};
+export { openModal, closeModal };
