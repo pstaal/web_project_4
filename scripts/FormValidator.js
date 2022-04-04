@@ -41,6 +41,11 @@ export default class FormValidator {
         }
       }
     
+      _disableButton(buttonElement) {
+        buttonElement.classList.add(this._settings.inactiveButtonClass);
+        buttonElement.disabled = true;
+      }
+    
     _toggleInputError (form, inputElement) {
         if (!inputElement.validity.valid) {
           // The parameter of showInputError() is now a form,
@@ -59,8 +64,14 @@ export default class FormValidator {
         evt.preventDefault();
     });
 
+   
+
     const inputList = [...form.querySelectorAll(this._settings.inputSelector)];
     const buttonElement = form.querySelector(this._settings.submitButtonSelector);
+
+    form.addEventListener("reset", () => { 
+      this._disableButton(buttonElement); 
+    }); 
   
     // Iterate over the resulting array
     inputList.forEach((inputElement) => {
