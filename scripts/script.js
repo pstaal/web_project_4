@@ -1,64 +1,24 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import { closeModal, openModal } from "./utils.js";
+import Section from "./Section.js";
+
+import { initialCards } from "./constants.js";
 
 
-const popupProfile = document.querySelector('.popup-profile');
-const popupPlace = document.querySelector('.popup-place');
-const popupForPlace = document.querySelector('.popup-picture');
-const editButton = document.querySelector('.profile__button-name-change');
-const popupProfileCloseButton = popupProfile.querySelector('.popup__close');
-const popupPlaceCloseButton = popupPlace.querySelector('.popup__close');
-const popupPictureCloseButton = popupForPlace.querySelector('.popup__close');
-const cardContainer = document.querySelector('.places');
-const newPlaceButton = document.querySelector('.profile__button-add-place');
-const popupFormProfile = document.querySelector('.popup__form-profile');
-const popupFormPlace = document.querySelector('.popup__form-place');
-const profileName = document.querySelector('.profile__name');
-const profileFunction = document.querySelector('.profile__function');
-const nameInput = document.querySelector("[name='name']"); 
-const titleInput = document.querySelector("[name='function']"); 
-const placeTitleInput = document.querySelector("[name='title']"); 
-const placeUrlInput = document.querySelector("[name='link']"); 
+const section = new Section({ 
+  items: initialCards, 
+  renderer: (item) => {
+    const card = new Card({text: item.name, imageLink: item.link}, "#card-template", () => {
 
-
-//initial cards for the page
-const initialCards = [
-    {
-      name: "Yosemite Valley",
-      link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-    },
-    {
-      name: "Lake Louise",
-      link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-    },
-    {
-      name: "Bald Mountains",
-      link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-    },
-    {
-      name: "Latemar",
-      link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-    },
-    {
-      name: "Vanoise National Park",
-      link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
-    },
-    {
-      name: "Lago di Braies",
-      link: "https://code.s3.yandex.net/web-code/lago.jpg"
-    }
-  ]; 
-
-  export function renderCard(settingsObject, template) {
-    return new Card(settingsObject, template).generateCard();
+    });
+    const element = card.generateCard();
+    this.addItem(element);
   }
+  },
+  ".places"
+);
 
-//put all initial cards into the DOM
-initialCards.forEach((card) => {
-    const element = renderCard({text: card.name, imageLink: card.link}, "#card-template");
-    cardContainer.append(element);
-});
 
 //enable form validation
 
