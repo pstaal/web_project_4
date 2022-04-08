@@ -7,10 +7,11 @@ const popupForPlace = document.querySelector('.popup-picture');
 
 export default class Card {
 
-    constructor(data, cardSelector) {
+    constructor(data, cardSelector, handleCardClick) {
         this._text = data.text;
         this._imageLink = data.imageLink
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate(){
@@ -26,15 +27,6 @@ export default class Card {
     _removeCard(evt){
         evt.target.parentElement.remove();
     }
-
-    _openPicturePopup (evt){
-        const imageLink = evt.target.src;
-        const imageName = evt.target.alt;
-        popupImage.setAttribute('src', imageLink);
-        popupImage.setAttribute('alt', imageName);    
-        popupImageTitle.textContent = imageName;
-        openModal(popupForPlace);
-    }
    
 
 
@@ -46,7 +38,7 @@ export default class Card {
             this._removeCard(evt);
           });
           this._element.querySelector(".places__card-image").addEventListener("click", (evt) => {
-            this._openPicturePopup(evt);
+            this._handleCardClick(evt);
           });
     }
 
