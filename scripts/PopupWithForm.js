@@ -1,4 +1,5 @@
 import Popup from "./PopUp.js";
+import { userInfo } from "./UserInfo.js";
 
 class PopupWithForm extends Popup {
     constructor(popupSelector, handleFormSubmit) {
@@ -65,11 +66,7 @@ const formPlace = new PopupWithForm (
 const formProfile = new PopupWithForm (
     ".popup-profile",
      (data) => {
-        const newName = data['name'];
-        const newExpertise = data['function'];
-      
-        profileName.textContent = newName;
-        profileFunction.textContent = newExpertise;
+        userInfo.setUserInfo(data); 
     }
 ); 
 
