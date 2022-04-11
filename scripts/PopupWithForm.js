@@ -1,5 +1,4 @@
 import Popup from "./PopUp.js";
-import { userInfo } from "./UserInfo.js";
 
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, handleFormSubmit) {
@@ -50,25 +49,4 @@ export default class PopupWithForm extends Popup {
     }
     
 
-}
-
-const formPlace = new PopupWithForm (
-    ".popup-place",
-     (data) => {
-        const placeTitle = data['title'];
-        const placeURL = data['link'];
-      
-        const newCard = renderCard({text: placeTitle, imageLink: placeURL}, "#card-template");
-        cardContainer.prepend(newCard);
-    }
-); 
-
-const formProfile = new PopupWithForm (
-    ".popup-profile",
-     (data) => {
-        userInfo.setUserInfo(data); 
-    }
-); 
-
-
-export { formPlace , formProfile };
+};

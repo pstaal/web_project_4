@@ -24,8 +24,4 @@ export default class UserInfo {
         profileFunction.textContent = newExpertise;
     }
 
-}
-
-const userInfo = new UserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
-
-export { userInfo };
+};

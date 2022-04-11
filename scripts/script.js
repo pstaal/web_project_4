@@ -5,15 +5,15 @@ import Section from "./Section.js";
 import { initialCards } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
-import UserInfo, { userInfo } from "./UserInfo.js";
+import UserInfo  from "./UserInfo.js";
 
-import { newPlaceButton, editButton, nameInput, titleInput } from "./constants.js";
+import { newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "./constants.js";
 
 //instantiate user info class
-const userinfo = new UserInfo({userName: "", userJob: ""});
+const userInfo = new UserInfo({userName: "", userJob: ""});
 
 //set default user name and user title
-userinfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
+userInfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
 
 //instantiate popupimage class
 const popupImage = new PopupWithImage(".popup-picture");
@@ -92,15 +92,15 @@ editButton.addEventListener('click', openProfilePopup);
 
 
 function openProfilePopup () {
-  profileValidator.resetValidation(popupProfile);  
+  profileValidator.resetValidation(popupProfileSelector);  
   const data = userInfo.getUserInfo();
-  nameInput.value = data.userName
+  nameInput.value = data.userName;
   titleInput.value = data.userJob;
   popupProfile.open();
 }
 
 function openPlaceForm () {
-  placeValidator.resetValidation(popupPlace);
+  placeValidator.resetValidation(popupPlaceSelector);
   popupPlace.open();
 }
 
