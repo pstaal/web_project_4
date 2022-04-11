@@ -4,7 +4,7 @@ import Section from "../Components/Section.js";
 import PopupWithImage from "../Components/PopupWithImage.js";
 import PopupWithForm from "../Components/PopupWithForm.js";
 import UserInfo  from "../Components/UserInfo.js";
-import { handleCardClick, handlePlaceSubmit, handleProfileSubmit } from "../Utils/utils.js";
+import { handleCardClick } from "../Utils/utils.js";
 
 import { initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "../Utils/constants.js";
 
@@ -82,6 +82,21 @@ function openPlaceForm () {
   placeValidator.resetValidation(popupPlaceSelector);
   popupPlace.open();
 }
+
+//create handle submit function for changing profile
+function handleProfileSubmit(data) {
+  userInfo.setUserInfo(data);
+}
+
+//create handle submit function for adding new places
+ function handlePlaceSubmit(data){
+  const placeTitle = data.title;
+  const placeURL = data.link;
+
+  const card = new Card({text: placeTitle, imageLink: placeURL}, "#card-template", handleCardClick);
+  const element = card.generateCard();
+  section.addItem(element);
+};
 
 
 
