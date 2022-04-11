@@ -1,12 +1,12 @@
-import FormValidator from "../Components/FormValidator.js";
-import Card from "../Components/Card.js";
-import Section from "../Components/Section.js";
-import PopupWithImage from "../Components/PopupWithImage.js";
-import PopupWithForm from "../Components/PopupWithForm.js";
-import UserInfo  from "../Components/UserInfo.js";
-import { handleCardClick } from "../Utils/utils.js";
+import FormValidator from "./Components/FormValidator.js";
+import Card from "./Components/Card.js";
+import Section from "./Components/Section.js";
+import PopupWithImage from "./Components/PopupWithImage.js";
+import PopupWithForm from "./Components/PopupWithForm.js";
+import UserInfo  from "./Components/UserInfo.js";
+import { handleCardClick } from "./Utils/utils.js";
 
-import { initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "../Utils/constants.js";
+import { initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "./Utils/constants.js";
 
 //instantiate user info class
 const userInfo = new UserInfo({userName: "", userJob: ""});
