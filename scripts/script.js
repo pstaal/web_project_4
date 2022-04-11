@@ -5,6 +5,14 @@ import Section from "./Section.js";
 
 import { initialCards } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm";
+import UserInfo, { userInfo } from "./UserInfo.js";
+
+//instantiate user info class
+const userinfo = new UserInfo({userName: "", userJob: ""});
+
+//set default user name and user title
+userinfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
 
 //instantiate popupimage class
 const popupImage = new PopupWithImage(".popup-picture");
@@ -28,9 +36,30 @@ const section = new Section({
   ".places"
 );
 
+//create handle submit function for adding new places
+function handlePlaceSubmit(data){
+  const placeTitle = data.title;
+  const placeURL = data.link;
+
+  const card = new Card({text: placeTitle, imageLink: placeURL}, "#card-template", handleCardClick);
+  const element = card.generateCard();
+  section.addItem(element);
+};
+
+//instantiate popup place form
+const popupPlace = new PopupWithForm(".popup-place", handlePlaceSubmit);
+
+
+//create handle submit function for chaning profile
+function handleProfileSubmit(data) {
+  userInfo.setUserInfo(data);
+}
+
+//instantiate popup profile form
+const popupProfile = new PopupWithForm(".popup-profile", handleProfileSubmit);
+
 
 //enable form validation
-
 const profileValidator = new FormValidator({
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
@@ -82,41 +111,9 @@ placeValidator.resetValidation(popupPlace);
 openModal(popupPlace);
 }
 
-//change the profile name and function
-function editProfile(evt) {
-    
-  evt.preventDefault();
-  
-  const newName = nameInput.value;
-  const newExpertise = titleInput.value;
-
-  profileName.textContent = newName;
-  profileFunction.textContent = newExpertise;
-
-   // reset form
-   popupFormProfile.reset();
-
-  //close modal
-  closeModal(popupProfile);
-}
 
 
-//add a new place to the list
-function addPlace(evt) {
 
-  evt.preventDefault();
 
-  const placeTitle = placeTitleInput.value;
-  const placeURL = placeUrlInput.value;
-
-  const newCard = renderCard({text: placeTitle, imageLink: placeURL}, "#card-template");
-  cardContainer.prepend(newCard);
-
-  // reset form
-  popupFormPlace.reset();
-
-   //close modal
-  closeModal(popupPlace);
-}
 
 
