@@ -17,6 +17,7 @@ userInfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
 
 //instantiate popupimage class
 const popupImage = new PopupWithImage(".popup-picture");
+popupImage.setEventListeners();
 
 //create handleCardClick function for cards
 function handleCardClick(evt) {
@@ -37,6 +38,8 @@ const section = new Section({
   ".places"
 );
 
+section.renderItems();
+
 //create handle submit function for adding new places
 function handlePlaceSubmit(data){
   const placeTitle = data.title;
@@ -49,6 +52,7 @@ function handlePlaceSubmit(data){
 
 //instantiate popup place form
 const popupPlace = new PopupWithForm(".popup-place", handlePlaceSubmit);
+popupPlace.setEventListeners();
 
 
 //create handle submit function for chaning profile
@@ -58,7 +62,7 @@ function handleProfileSubmit(data) {
 
 //instantiate popup profile form
 const popupProfile = new PopupWithForm(".popup-profile", handleProfileSubmit);
-
+popupProfile.setEventListeners();
 
 //enable form validation
 const profileValidator = new FormValidator({

@@ -8,7 +8,7 @@ export default class PopupWithForm extends Popup {
 
     _getInputValues() {
         // Get all field elements
-        this._inputList = this._element.querySelectorAll(".form__input");
+        this._inputList = this._popup.querySelectorAll(".popup__input");
 
         // Create an empty object
         this._formValues = {};
