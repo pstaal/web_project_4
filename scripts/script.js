@@ -1,13 +1,12 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import Section from "./Section.js";
-
-import { initialCards } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo  from "./UserInfo.js";
+import { handleCardClick, handlePlaceSubmit, handleProfileSubmit, openPlaceForm, openProfilePopup } from "./utils.js";
 
-import { newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "./constants.js";
+import { initialCards, newPlaceButton, editButton } from "./constants.js";
 
 //instantiate user info class
 const userInfo = new UserInfo({userName: "", userJob: ""});
@@ -18,13 +17,6 @@ userInfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
 //instantiate popupimage class
 const popupImage = new PopupWithImage(".popup-picture");
 popupImage.setEventListeners();
-
-//create handleCardClick function for cards
-function handleCardClick(evt) {
- const imageLink = evt.target.src;
- const imageName = evt.target.alt;
- popupImage.open(imageLink, imageName); 
-};
 
 // generate initial cards on screen
 const section = new Section({ 
@@ -40,25 +32,9 @@ const section = new Section({
 
 section.renderItems();
 
-//create handle submit function for adding new places
-function handlePlaceSubmit(data){
-  const placeTitle = data.title;
-  const placeURL = data.link;
-
-  const card = new Card({text: placeTitle, imageLink: placeURL}, "#card-template", handleCardClick);
-  const element = card.generateCard();
-  section.addItem(element);
-};
-
 //instantiate popup place form
 const popupPlace = new PopupWithForm(".popup-place", handlePlaceSubmit);
 popupPlace.setEventListeners();
-
-
-//create handle submit function for chaning profile
-function handleProfileSubmit(data) {
-  userInfo.setUserInfo(data);
-}
 
 //instantiate popup profile form
 const popupProfile = new PopupWithForm(".popup-profile", handleProfileSubmit);
@@ -95,18 +71,6 @@ editButton.addEventListener('click', openProfilePopup);
 
 
 
-function openProfilePopup () {
-  profileValidator.resetValidation(popupProfileSelector);  
-  const data = userInfo.getUserInfo();
-  nameInput.value = data.userName;
-  titleInput.value = data.userJob;
-  popupProfile.open();
-}
-
-function openPlaceForm () {
-  placeValidator.resetValidation(popupPlaceSelector);
-  popupPlace.open();
-}
 
 
 

@@ -1,18 +1,11 @@
-export const popupProfileSelector = document.querySelector('.popup-profile');
-export const popupPlaceSelector = document.querySelector('.popup-place');
-export const popupForPlace = document.querySelector('.popup-picture');
 export const editButton = document.querySelector('.profile__button-name-change');
 export const newPlaceButton = document.querySelector('.profile__button-add-place');
-export const popupFormProfile = document.querySelector('.popup__form-profile');
-export const popupFormPlace = document.querySelector('.popup__form-place');
-export const profileName = document.querySelector('.profile__name');
-export const profileFunction = document.querySelector('.profile__function');
 export const nameInput = document.querySelector("[name='userName']"); 
 export const titleInput = document.querySelector("[name='userJob']"); 
-export const placeTitleInput = document.querySelector("[name='title']"); 
-export const placeUrlInput = document.querySelector("[name='link']"); 
-export const popupImage = document.querySelector('.popup-picture__image');
-export const popupImageTitle = document.querySelector('.popup-picture__title');
+export const popupProfileSelector = document.querySelector('.popup-profile');
+export const popupPlaceSelector = document.querySelector('.popup-place');
+export const profileName = document.querySelector('.profile__name');
+export const profileFunction = document.querySelector('.profile__function');
 
 
 //initial cards for the page
