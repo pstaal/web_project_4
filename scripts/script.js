@@ -1,12 +1,13 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
-import { closeModal, openModal } from "./utils.js";
 import Section from "./Section.js";
 
 import { initialCards } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm";
 import UserInfo, { userInfo } from "./UserInfo.js";
+
+import { newPlaceButton, editButton, nameInput, titleInput } from "./constants.js";
 
 //instantiate user info class
 const userinfo = new UserInfo({userName: "", userJob: ""});
@@ -30,7 +31,7 @@ const section = new Section({
   renderer: (item) => {
     const card = new Card({text: item.name, imageLink: item.link}, "#card-template", handleCardClick);
     const element = card.generateCard();
-    this.addItem(element);
+    section.addItem(element);
   }
   },
   ".places"
@@ -80,8 +81,6 @@ const placeValidator = new FormValidator({
 
 placeValidator.enableValidation();
 
-//add event listeners to submit the form for profile
-popupFormProfile.addEventListener('submit', editProfile);
 
 //add event listener to open the form for a new place card
 newPlaceButton.addEventListener('click', openPlaceForm);
@@ -89,26 +88,20 @@ newPlaceButton.addEventListener('click', openPlaceForm);
 //add event listener to open the form for the profile
 editButton.addEventListener('click', openProfilePopup);
 
-//add event listener to submit the form for the new place card
-popupFormPlace.addEventListener('submit', addPlace);
 
-// add eventlisteners to the three modals
-
-popupPlaceCloseButton.addEventListener('click', function() {closeModal(popupPlace)});
-popupProfileCloseButton.addEventListener('click', function() {closeModal(popupProfile)});
-popupPictureCloseButton.addEventListener('click', function() {closeModal(popupForPlace)});
 
 
 function openProfilePopup () {
   profileValidator.resetValidation(popupProfile);  
-  nameInput.value = profileName.textContent;
-  titleInput.value = profileFunction.textContent;
-  openModal(popupProfile); 
+  const data = userInfo.getUserInfo();
+  nameInput.value = data.userName
+  titleInput.value = data.userJob;
+  popupProfile.open();
 }
 
 function openPlaceForm () {
-placeValidator.resetValidation(popupPlace);
-openModal(popupPlace);
+  placeValidator.resetValidation(popupPlace);
+  popupPlace.open();
 }
 
 
