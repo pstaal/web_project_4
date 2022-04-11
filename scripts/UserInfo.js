@@ -1,3 +1,5 @@
+import { profileName, profileFunction } from "./constants.js";
+
 export default class UserInfo {
     constructor ({userName, userJob}){
         this._userName = userName;

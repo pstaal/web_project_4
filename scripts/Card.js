@@ -1,7 +1,4 @@
-import { openModal } from "./utils.js";
 
-
- 
 
 export default class Card {
 

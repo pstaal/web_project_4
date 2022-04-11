@@ -4,7 +4,7 @@ import Section from "./Section.js";
 
 import { initialCards } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm";
+import PopupWithForm from "./PopupWithForm.js";
 import UserInfo, { userInfo } from "./UserInfo.js";
 
 import { newPlaceButton, editButton, nameInput, titleInput } from "./constants.js";
