@@ -4,8 +4,8 @@
   "description": "The fourth project of the online web developer bootcamp Practicum. This is an interactive and responsive website with a personal profile, and different places that a person has visited. The user can edit his or her profile, add new places, and favorite places.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev":
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve --mode development"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,14 @@
   },
   "homepage": "https://github.com/pstaal/web_project_4#readme",
   "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.4",
     "webpack": "^5.72.0",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "dependencies": {
+    "core-js": "^3.21.1"
   }
 }
