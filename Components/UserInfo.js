@@ -1,4 +1,4 @@
-import { profileName, profileFunction } from "./constants.js";
+import { profileName, profileFunction } from "../Utils/constants.js";
 
 export default class UserInfo {
     constructor ({userName, userJob}){
