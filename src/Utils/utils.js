@@ -1,5 +1,4 @@
-
-import { nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "./constants.js";
+import Card from "../../Components/Card.js";
 
 //create handleCardClick function for cards
 export function handleCardClick(evt) {
@@ -23,17 +22,3 @@ export function handleProfileSubmit(data) {
   userInfo.setUserInfo(data);
 }
 
-//function to open profile
-export function openProfilePopup () {
-  profileValidator.resetValidation(popupProfileSelector);  
-  const data = userInfo.getUserInfo();
-  nameInput.value = data.userName;
-  titleInput.value = data.userJob;
-  popupProfile.open();
-}
-
-//function to open place form
-export function openPlaceForm () {
-  placeValidator.resetValidation(popupPlaceSelector);
-  popupPlace.open();
-}

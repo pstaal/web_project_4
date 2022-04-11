@@ -4,9 +4,9 @@ import Section from "../Components/Section.js";
 import PopupWithImage from "../Components/PopupWithImage.js";
 import PopupWithForm from "../Components/PopupWithForm.js";
 import UserInfo  from "../Components/UserInfo.js";
-import { handleCardClick, handlePlaceSubmit, handleProfileSubmit, openPlaceForm, openProfilePopup } from "../Utils/utils.js";
+import { handleCardClick, handlePlaceSubmit, handleProfileSubmit } from "../Utils/utils.js";
 
-import { initialCards, newPlaceButton, editButton } from "../Utils/constants.js";
+import { initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "../Utils/constants.js";
 
 //instantiate user info class
 const userInfo = new UserInfo({userName: "", userJob: ""});
@@ -68,7 +68,20 @@ newPlaceButton.addEventListener('click', openPlaceForm);
 //add event listener to open the form for the profile
 editButton.addEventListener('click', openProfilePopup);
 
+//function to open profile
+function openProfilePopup () {
+  profileValidator.resetValidation(popupProfileSelector);  
+  const data = userInfo.getUserInfo();
+  nameInput.value = data.userName;
+  titleInput.value = data.userJob;
+  popupProfile.open();
+}
 
+//function to open place form
+function openPlaceForm () {
+  placeValidator.resetValidation(popupPlaceSelector);
+  popupPlace.open();
+}
 
 
 
