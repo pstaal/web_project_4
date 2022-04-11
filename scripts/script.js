@@ -4,14 +4,23 @@ import { closeModal, openModal } from "./utils.js";
 import Section from "./Section.js";
 
 import { initialCards } from "./constants.js";
+import PopupWithImage from "./PopupWithImage.js";
 
+//instantiate popupimage class
+const popupImage = new PopupWithImage(".popup-picture");
 
+//create handleCardClick function for cards
+function handleCardClick(evt) {
+ const imageLink = evt.target.src;
+ const imageName = evt.target.alt;
+ popupImage.open(imageLink, imageName); 
+};
+
+// generate initial cards on screen
 const section = new Section({ 
   items: initialCards, 
   renderer: (item) => {
-    const card = new Card({text: item.name, imageLink: item.link}, "#card-template", () => {
-
-    });
+    const card = new Card({text: item.name, imageLink: item.link}, "#card-template", handleCardClick);
     const element = card.generateCard();
     this.addItem(element);
   }
