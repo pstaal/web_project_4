@@ -11,11 +11,11 @@
     </head>
     <body class="page">
         <header class="header">
-            <img class="logo" alt="logo" src="src/images/logo.svg">
+            <img class="logo" alt="logo" src="<%=require('src/images/logo.svg')%>">
         </header>
         <main class="content">
             <div class="profile">
-                <img class="profile__picture" src="src/images/profile_pic.jpg" alt="picture of jacque cousteau">
+                <img class="profile__picture" src="<%=require('src/images/profile_pic.jpg')%>" alt="picture of jacque cousteau">
                 <div class="profile__content">
                     <div class="profile__title">
                         <h1 class="profile__name">Jacques Cousteau</h1>
@@ -23,7 +23,7 @@
                     </div>
                     <p class="profile__function">Explorer</p>
                 </div>
-                <button type="button" class="profile__button-add-place"><img src="./src/images/plus-sign.svg" alt="plus sign symbol" class="profile__plus-sign"></button>
+                <button type="button" class="profile__button-add-place"><img src="<%=require('./src/images/plus-sign.svg')%>" alt="plus sign symbol" class="profile__plus-sign"></button>
             </div>
             <section>
                 <ul class="places">

@@ -8,6 +8,8 @@ import { handleCardClick } from "./Utils/utils.js";
 
 import { initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "./Utils/constants.js";
 
+import "./pages/styles.css";
+
 //instantiate user info class
 const userInfo = new UserInfo({userName: "", userJob: ""});
 
