@@ -1,0 +1,20 @@
+{
+  "name": "web_project_4",
+  "version": "1.0.0",
+  "description": "The fourth project of the online web developer bootcamp Practicum. This is an interactive and responsive website with a personal profile, and different places that a person has visited. The user can edit his or her profile, add new places, and favorite places.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pstaal/web_project_4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pstaal/web_project_4/issues"
+  },
+  "homepage": "https://github.com/pstaal/web_project_4#readme"
+}
