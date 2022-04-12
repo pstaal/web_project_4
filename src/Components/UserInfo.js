@@ -15,5 +15,4 @@ export default class UserInfo {
         this._profileName.textContent = userName;
         this._profileFunction.textContent = userJob;
     }
-
 };
