@@ -16,11 +16,11 @@ export default class Card {
     }
 
     _toggleHeart(){
-        this._element.classList.toggle('places__card-button-liked');
+        this._heartIcon.classList.toggle('places__card-button-liked');
     }
 
     _removeCard(){
-        this._element.parentElement.remove();
+        this._element.remove();
         this._element = null;
     }
    
@@ -40,6 +40,7 @@ export default class Card {
 
     generateCard() {
         this._element = this._getTemplate();
+        this._heartIcon = this._element.querySelector(".places__card-button");
         this._setEventListeners(); 
         this._element.querySelector(".places__card-image").src = this._imageLink;
         this._element.querySelector(".places__card-image").alt = this._text;
