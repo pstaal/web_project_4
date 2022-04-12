@@ -8,7 +8,7 @@ import UserInfo  from "../components/UserInfo.js";
 
 import { profileName, profileFunction, initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
 
-import "./pages/styles.css";
+import "./styles.css";
 
 //instantiate user info class
 const userInfo = new UserInfo({userNameSelector: profileName, userJobSelector: profileFunction});
