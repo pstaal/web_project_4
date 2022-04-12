@@ -6,12 +6,12 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo  from "../components/UserInfo.js";
 
 
-import { profileName, profileFunction, initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
+import { initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
 
 import "./styles.css";
 
 //instantiate user info class
-const userInfo = new UserInfo({userNameSelector: profileName, userJobSelector: profileFunction});
+const userInfo = new UserInfo({userNameSelector: '.profile__name', userJobSelector: '.profile__function'});
 
 //set default user name and user title
 userInfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
