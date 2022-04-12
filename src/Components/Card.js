@@ -15,12 +15,13 @@ export default class Card {
         return cardElement;
     }
 
-    _toggleHeart(evt){
-        evt.target.classList.toggle('places__card-button-liked');
+    _toggleHeart(){
+        this._element.classList.toggle('places__card-button-liked');
     }
 
-    _removeCard(evt){
-        evt.target.parentElement.remove();
+    _removeCard(){
+        this._element.parentElement.remove();
+        this._element = null;
     }
    
 
@@ -33,14 +34,13 @@ export default class Card {
             this._removeCard(evt);
           });
           this._element.querySelector(".places__card-image").addEventListener("click", (evt) => {
-            this._handleCardClick(evt);
+            this._handleCardClick({ link: this._imageLink, text: this._text }); 
           });
     }
 
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners(); 
-      
         this._element.querySelector(".places__card-image").src = this._imageLink;
         this._element.querySelector(".places__card-image").alt = this._text;
         this._element.querySelector(".places__card-title").textContent = this._text;

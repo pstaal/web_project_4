@@ -1,17 +1,17 @@
-import FormValidator from "./Components/FormValidator.js";
-import Card from "./Components/Card.js";
-import Section from "./Components/Section.js";
-import PopupWithImage from "./Components/PopupWithImage.js";
-import PopupWithForm from "./Components/PopupWithForm.js";
-import UserInfo  from "./Components/UserInfo.js";
-import { handleCardClick } from "./Utils/utils.js";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo  from "../components/UserInfo.js";
 
-import { initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector } from "./Utils/constants.js";
+
+import { profileName, profileFunction, initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
 
 import "./pages/styles.css";
 
 //instantiate user info class
-const userInfo = new UserInfo({userName: "", userJob: ""});
+const userInfo = new UserInfo({userNameSelector: profileName, userJobSelector: profileFunction});
 
 //set default user name and user title
 userInfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
@@ -20,12 +20,22 @@ userInfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
 const popupImage = new PopupWithImage(".popup-picture");
 popupImage.setEventListeners();
 
+//create handleCardClick function for cards
+export function handleCardClick({ link, text }) {
+  popupImage.open(link, text); 
+};
+
+//function to create a new card
+function createCard(data, template, callback) {
+  const card = new Card(data, template, callback);
+  return card.generateCard();
+}
+
 // generate initial cards on screen
 const section = new Section({ 
   items: initialCards, 
   renderer: (item) => {
-    const card = new Card({text: item.name, imageLink: item.link}, "#card-template", handleCardClick);
-    const element = card.generateCard();
+    const element = createCard({text: item.name, imageLink: item.link}, "#card-template", handleCardClick);
     section.addItem(element);
   }
   },
@@ -73,9 +83,9 @@ editButton.addEventListener('click', openProfilePopup);
 //function to open profile
 function openProfilePopup () {
   profileValidator.resetValidation(popupProfileSelector);  
-  const data = userInfo.getUserInfo();
-  nameInput.value = data.userName;
-  titleInput.value = data.userJob;
+  const { userName, userJob } = userInfo.getUserInfo();
+  nameInput.value = userName;
+  titleInput.value = userJob;
   popupProfile.open();
 }
 
@@ -88,6 +98,7 @@ function openPlaceForm () {
 //create handle submit function for changing profile
 function handleProfileSubmit(data) {
   userInfo.setUserInfo(data);
+  profileForm.reset();
 }
 
 //create handle submit function for adding new places
@@ -95,9 +106,9 @@ function handleProfileSubmit(data) {
   const placeTitle = data.title;
   const placeURL = data.link;
 
-  const card = new Card({text: placeTitle, imageLink: placeURL}, "#card-template", handleCardClick);
-  const element = card.generateCard();
+  const element = createCard({text: placeTitle, imageLink: placeURL}, "#card-template", handleCardClick);
   section.addItem(element);
+  placeForm.reset();
 };
 
 
