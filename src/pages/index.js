@@ -127,7 +127,19 @@ function openPlaceForm () {
 
 //create handle submit function for changing profile
 function handleProfileSubmit(data) {
-  userInfo.setUserInfo(data);
+  fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
+  method: "PATCH",
+  headers: {
+    authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    name: data.userName,
+    about: data.userJob
+  })
+  }).then(res => res.json())
+    .then(data => userInfo.setUserInfo({ userName: data.name, userJob: data.about})); 
+  
   profileForm.reset();
 }
 
