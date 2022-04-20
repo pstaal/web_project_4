@@ -6,7 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo  from "../components/UserInfo.js";
 
 
-import { profileName, profileFunction, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
+import { profileName, profileFunction, profilePicture, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
 
 import "./styles.css";
 
@@ -42,6 +42,7 @@ function getUser() {
     .then((result) => {
         profileName.textContent = result.name;
         profileFunction.textContent = result.about;
+        profilePicture.src = result.avatar;
     })
 }
 
