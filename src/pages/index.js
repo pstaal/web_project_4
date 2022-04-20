@@ -1,78 +1,20 @@
 import FormValidator from "../components/FormValidator.js";
-import Card from "../components/Card.js";
-import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import UserInfo  from "../components/UserInfo.js";
+import { api, createCard, handleCardClick, userInfo } from "../components/Api.js";
 
 
-import { profileName, profileFunction, profilePicture, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
+
+import { newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
 
 import "./styles.css";
-
-//instantiate user info class
-const userInfo = new UserInfo({userNameSelector: '.profile__name', userJobSelector: '.profile__function'});
-
-//set default user name and user title
-userInfo.setUserInfo({userName: "Jacques Cousteau", userJob: "Explorer"});
 
 //instantiate popupimage class
 const popupImage = new PopupWithImage(".popup-picture");
 popupImage.setEventListeners();
 
-//create handleCardClick function for cards
-export function handleCardClick({ link, text }) {
-  popupImage.open(link, text); 
-};
-
-//function to create a new card
-function createCard(data, template, callback) {
-  const card = new Card(data, template, callback);
-  return card.generateCard();
-}
-
-//function to set the initial user
-function getUser() {
-  fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
-    headers: {
-      authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435"
-    }
-  })
-    .then(res => res.json())
-    .then((result) => {
-        profileName.textContent = result.name;
-        profileFunction.textContent = result.about;
-        profilePicture.src = result.avatar;
-    })
-}
-
-getUser();
-
-
-//function to retrieve all the latest cards from the server
-function getCards() {
-  fetch("https://around.nomoreparties.co/v1/group-12/cards", {
-  headers: {
-    authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435"
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    const section = new Section({ 
-      items: result, 
-      renderer: (item) => {
-        const element = createCard({text: item.name, imageLink: item.link}, "#card-template", handleCardClick);
-        section.addItem(element);
-      }
-      },
-      ".places"
-    );
-    
-    section.renderItems();
-  }); 
-}
-
-getCards();
+api.getInitialCards();
+api.getInitialUser();
 
 //instantiate popup place form
 const popupPlace = new PopupWithForm(".popup-place", handlePlaceSubmit);
@@ -127,18 +69,7 @@ function openPlaceForm () {
 
 //create handle submit function for changing profile
 function handleProfileSubmit(data) {
-  fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
-  method: "PATCH",
-  headers: {
-    authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435",
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    name: data.userName,
-    about: data.userJob
-  })
-  }).then(res => res.json())
-    .then(data => userInfo.setUserInfo({ userName: data.name, userJob: data.about})); 
+  api.setNewUser(data);
   
   profileForm.reset();
 }
