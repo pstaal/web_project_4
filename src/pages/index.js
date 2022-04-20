@@ -6,7 +6,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo  from "../components/UserInfo.js";
 
 
-import { initialCards, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
+import { newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
 
 import "./styles.css";
 
@@ -31,18 +31,31 @@ function createCard(data, template, callback) {
   return card.generateCard();
 }
 
-// generate initial cards on screen
-const section = new Section({ 
-  items: initialCards, 
-  renderer: (item) => {
-    const element = createCard({text: item.name, imageLink: item.link}, "#card-template", handleCardClick);
-    section.addItem(element);
-  }
-  },
-  ".places"
-);
+//function to retrieve all the latest cards from the server
 
-section.renderItems();
+function fetchAndAddCards() {
+  fetch("https://around.nomoreparties.co/v1/group-12/cards", {
+  headers: {
+    authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435"
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    const section = new Section({ 
+      items: result, 
+      renderer: (item) => {
+        const element = createCard({text: item.name, imageLink: item.link}, "#card-template", handleCardClick);
+        section.addItem(element);
+      }
+      },
+      ".places"
+    );
+    
+    section.renderItems();
+  }); 
+}
+
+fetchAndAddCards();
 
 //instantiate popup place form
 const popupPlace = new PopupWithForm(".popup-place", handlePlaceSubmit);
