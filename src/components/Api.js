@@ -35,7 +35,7 @@ class Api {
               const section = new Section({ 
                 items: result, 
                 renderer: (item) => {
-                  const element = createCard({text: item.name, imageLink: item.link}, "#card-template", handleCardClick);
+                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes.length}, "#card-template", handleCardClick);
                   section.addItem(element);
                 }
                 },
