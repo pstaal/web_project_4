@@ -70,17 +70,12 @@ function openPlaceForm () {
 //create handle submit function for changing profile
 function handleProfileSubmit(data) {
   api.setNewUser(data);
-  
   profileForm.reset();
 }
 
 //create handle submit function for adding new places
  function handlePlaceSubmit(data){
-  const placeTitle = data.title;
-  const placeURL = data.link;
-
-  const element = createCard({text: placeTitle, imageLink: placeURL}, "#card-template", handleCardClick);
-  section.addItem(element);
+  api.addCart(data)
   placeForm.reset();
 };
 

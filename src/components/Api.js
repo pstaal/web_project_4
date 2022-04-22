@@ -23,6 +23,7 @@ class Api {
     constructor({ baseUrl, headers}) {
         this._baseUrl = baseUrl;
         this._headers = headers;
+        this._section = null;
       }
     
       getInitialCards() {
@@ -40,10 +41,28 @@ class Api {
                 },
                 ".places"
               );
+              this._section = section;
               
-              section.renderItems();
+              this._section.renderItems();
             });  
       }
+
+
+      addCart(data){
+        fetch(`${this._baseUrl}/cards`, {
+          method: "POST",
+          headers: this._headers,
+          body: JSON.stringify({
+            name: data.title,
+            link: data.link
+          })
+        })
+        .then((res) => res.json())
+        .then((result) => {
+          const element = createCard({text: result.name, imageLink: result.link}, "#card-template", handleCardClick);
+          this._section.addItem(element);
+        });
+     }
 
       getInitialUser() {
         fetch(`${this._baseUrl}/users/me`, {
