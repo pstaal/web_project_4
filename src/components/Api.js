@@ -8,7 +8,6 @@ import PopupWithImage from "./PopupWithImage";
 
 //handleclick function for deleting card
 function handleClick(card) {
-  console.log(card)
   api.deleteCard(card.id);
   card.removeCard();
 }
@@ -77,7 +76,6 @@ class Api {
         })
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
           const element = createCard({text: result.name, imageLink: result.link, likes: result.likes.length, owner: document.querySelector(".profile__name").innerHTML, _id: result._id}, "#card-template", handleCardClick, popupConfirmation);
           this._section.addItem(element);
         });
@@ -89,6 +87,30 @@ class Api {
         method: "DELETE",
         headers: this._headers
       });
+     }
+
+     toggleLike(id) {
+       let card = document.getElementById(id);
+       if(card.querySelector(".places__card-button").classList.contains("places__card-button-liked")){
+        fetch(`${this._baseUrl}/cards/likes/${id}`, {
+          method: "DELETE",
+          headers: this._headers
+        })
+        .then((res) => res.json())
+        .then((result) => {
+          card.querySelector(".places__likes-counter").innerHTML = result.likes.length;
+        });
+         
+       } else {
+        fetch(`${this._baseUrl}/cards/likes/${id}`, {
+          method: "PUT",
+          headers: this._headers
+        })
+        .then((res) => res.json())
+        .then((result) => {
+          card.querySelector(".places__likes-counter").innerHTML = result.likes.length;
+        });
+       }
      }
 
       getInitialUser() {

@@ -1,3 +1,6 @@
+import { api } from "./Api";
+
+
 export default class Card {
 
     constructor(data, cardSelector, handleCardClick, popupConfirmation) {
@@ -29,8 +32,9 @@ export default class Card {
 
 
     _setEventListeners() {
-        this._element.querySelector(".places__card-button").addEventListener("click", (evt) => {
-            this._toggleHeart(evt);
+        this._element.querySelector(".places__card-button").addEventListener("click", () => {
+            api.toggleLike(this.id);
+            this._toggleHeart();
           });
           if(this._element.querySelector(".places__card-delete-icon")){ 
             this._element.querySelector(".places__card-delete-icon").addEventListener("click", () => {
@@ -44,6 +48,7 @@ export default class Card {
 
     generateCard() {
         this._element = this._getTemplate();
+        this._element.setAttribute("id", this.id);
         this._heartIcon = this._element.querySelector(".places__card-button");
         if(this._owner !== document.querySelector(".profile__name").innerHTML) {
           this._element.querySelector(".places__card-delete-icon").remove();
