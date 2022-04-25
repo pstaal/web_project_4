@@ -76,7 +76,7 @@ class Api {
         })
         .then((res) => res.json())
         .then((result) => {
-          const element = createCard({text: result.name, imageLink: result.link, likes: result.likes.length, owner: document.querySelector(".profile__name").innerHTML, _id: result._id}, "#card-template", handleCardClick, popupConfirmation);
+          const element = createCard({text: result.name, imageLink: result.link, likes: result.likes, owner: document.querySelector(".profile__name").innerHTML, _id: result._id}, "#card-template", handleCardClick, popupConfirmation);
           this._section.addItem(element);
         });
      }
