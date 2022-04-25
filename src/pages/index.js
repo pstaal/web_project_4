@@ -1,17 +1,12 @@
 import FormValidator from "../components/FormValidator.js";
-import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import { api, createCard, handleCardClick, userInfo } from "../components/Api.js";
+import { api, userInfo } from "../components/Api.js";
 
 
 
 import { newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm } from "../utils/constants.js";
 
 import "./styles.css";
-
-//instantiate popupimage class
-const popupImage = new PopupWithImage(".popup-picture");
-popupImage.setEventListeners();
 
 api.getInitialCards();
 api.getInitialUser();

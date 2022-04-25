@@ -2,14 +2,31 @@ import Card from "./Card";
 import Section from "./Section";
 import { profilePicture } from "../utils/constants";
 import UserInfo from "./UserInfo";
+import PopupConfirmation from "./PopupConfirmation";
+import PopupWithImage from "./PopupWithImage";
+
+
+//handleclick function for deleting card
+function handleClick(card) {
+  console.log("it worked!!");
+  card.removeCard();
+}
+
+//instantiate popup confirmation class
+const popupConfirmation = new PopupConfirmation(".popup-confirm", handleClick);
+popupConfirmation.setEventListeners();
+
+//instantiate popupimage class
+const popupImage = new PopupWithImage(".popup-picture");
+popupImage.setEventListeners();
 
 //instantiate user info class
 export const userInfo = new UserInfo({userNameSelector: '.profile__name', userJobSelector: '.profile__function'});
 
 
 //function to create a new card
-export function createCard(data, template, callback) {
-    const card = new Card(data, template, callback);
+function createCard(data, template, callback, popupConfirmation) {
+    const card = new Card(data, template, callback, popupConfirmation);
     return card.generateCard();
 }
 
@@ -35,7 +52,7 @@ class Api {
               const section = new Section({ 
                 items: result, 
                 renderer: (item) => {
-                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes.length}, "#card-template", handleCardClick);
+                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes.length}, "#card-template", handleCardClick, popupConfirmation);
                   section.addItem(element);
                 }
                 },
@@ -59,7 +76,7 @@ class Api {
         })
         .then((res) => res.json())
         .then((result) => {
-          const element = createCard({text: result.name, imageLink: result.link}, "#card-template", handleCardClick);
+          const element = createCard({text: result.name, imageLink: result.link}, "#card-template", handleCardClick, popupConfirmation);
           this._section.addItem(element);
         });
      }

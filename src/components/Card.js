@@ -1,13 +1,12 @@
-
-
 export default class Card {
 
-    constructor(data, cardSelector, handleCardClick) {
+    constructor(data, cardSelector, handleCardClick, popupConfirmation) {
         this._text = data.text;
         this._imageLink = data.imageLink;
         this._likeCount = data.likes;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._popupConfirmation = popupConfirmation;
     }
 
     _getTemplate(){
@@ -20,7 +19,7 @@ export default class Card {
         this._heartIcon.classList.toggle('places__card-button-liked');
     }
 
-    _removeCard(){
+    removeCard(){
         this._element.remove();
         this._element = null;
     }
@@ -31,8 +30,8 @@ export default class Card {
         this._element.querySelector(".places__card-button").addEventListener("click", (evt) => {
             this._toggleHeart(evt);
           });
-          this._element.querySelector(".places__card-delete-icon").addEventListener("click", (evt) => {
-            this._removeCard(evt);
+          this._element.querySelector(".places__card-delete-icon").addEventListener("click", () => {
+            this._popupConfirmation.open(this);
           });
           this._element.querySelector(".places__card-image").addEventListener("click", (evt) => {
             this._handleCardClick({ link: this._imageLink, text: this._text }); 
