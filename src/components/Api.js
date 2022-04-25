@@ -52,7 +52,7 @@ class Api {
               const section = new Section({ 
                 items: result, 
                 renderer: (item) => {
-                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes.length, owner: item.owner.name, _id: item._id}, "#card-template", handleCardClick, popupConfirmation);
+                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes, owner: item.owner.name, _id: item._id}, "#card-template", handleCardClick, popupConfirmation);
                   section.addItem(element);
                 }
                 },
