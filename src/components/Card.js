@@ -7,6 +7,7 @@ export default class Card {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._popupConfirmation = popupConfirmation;
+        this._owner = data.owner;
     }
 
     _getTemplate(){
@@ -30,9 +31,11 @@ export default class Card {
         this._element.querySelector(".places__card-button").addEventListener("click", (evt) => {
             this._toggleHeart(evt);
           });
-          this._element.querySelector(".places__card-delete-icon").addEventListener("click", () => {
-            this._popupConfirmation.open(this);
-          });
+          if(this._element.querySelector(".places__card-delete-icon")){ 
+            this._element.querySelector(".places__card-delete-icon").addEventListener("click", () => {
+              this._popupConfirmation.open(this);
+            });
+          }
           this._element.querySelector(".places__card-image").addEventListener("click", (evt) => {
             this._handleCardClick({ link: this._imageLink, text: this._text }); 
           });
@@ -41,6 +44,9 @@ export default class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._heartIcon = this._element.querySelector(".places__card-button");
+        if(this._owner !== document.querySelector(".profile__name").innerHTML) {
+          this._element.querySelector(".places__card-delete-icon").remove();
+        }
         this._setEventListeners(); 
         this._element.querySelector(".places__card-image").src = this._imageLink;
         this._element.querySelector(".places__card-image").alt = this._text;

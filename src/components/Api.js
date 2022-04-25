@@ -8,7 +8,6 @@ import PopupWithImage from "./PopupWithImage";
 
 //handleclick function for deleting card
 function handleClick(card) {
-  console.log("it worked!!");
   card.removeCard();
 }
 
@@ -52,7 +51,7 @@ class Api {
               const section = new Section({ 
                 items: result, 
                 renderer: (item) => {
-                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes.length}, "#card-template", handleCardClick, popupConfirmation);
+                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes.length, owner: item.owner.name}, "#card-template", handleCardClick, popupConfirmation);
                   section.addItem(element);
                 }
                 },
@@ -76,7 +75,8 @@ class Api {
         })
         .then((res) => res.json())
         .then((result) => {
-          const element = createCard({text: result.name, imageLink: result.link}, "#card-template", handleCardClick, popupConfirmation);
+          console.log(result);
+          const element = createCard({text: result.name, imageLink: result.link, likes: result.likes.length, owner: document.querySelector(".profile__name").innerHTML}, "#card-template", handleCardClick, popupConfirmation);
           this._section.addItem(element);
         });
      }
