@@ -8,6 +8,7 @@ export default class Card {
         this._handleCardClick = handleCardClick;
         this._popupConfirmation = popupConfirmation;
         this._owner = data.owner;
+        this.id = data._id;
     }
 
     _getTemplate(){

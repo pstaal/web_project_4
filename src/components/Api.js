@@ -8,6 +8,8 @@ import PopupWithImage from "./PopupWithImage";
 
 //handleclick function for deleting card
 function handleClick(card) {
+  console.log(card)
+  api.deleteCard(card.id);
   card.removeCard();
 }
 
@@ -51,7 +53,7 @@ class Api {
               const section = new Section({ 
                 items: result, 
                 renderer: (item) => {
-                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes.length, owner: item.owner.name}, "#card-template", handleCardClick, popupConfirmation);
+                  const element = createCard({text: item.name, imageLink: item.link, likes: item.likes.length, owner: item.owner.name, _id: item._id}, "#card-template", handleCardClick, popupConfirmation);
                   section.addItem(element);
                 }
                 },
@@ -76,9 +78,17 @@ class Api {
         .then((res) => res.json())
         .then((result) => {
           console.log(result);
-          const element = createCard({text: result.name, imageLink: result.link, likes: result.likes.length, owner: document.querySelector(".profile__name").innerHTML}, "#card-template", handleCardClick, popupConfirmation);
+          const element = createCard({text: result.name, imageLink: result.link, likes: result.likes.length, owner: document.querySelector(".profile__name").innerHTML, _id: result._id}, "#card-template", handleCardClick, popupConfirmation);
           this._section.addItem(element);
         });
+     }
+
+
+     deleteCard(id) {
+      fetch(`${this._baseUrl}/cards/${id}`, {
+        method: "DELETE",
+        headers: this._headers
+      });
      }
 
       getInitialUser() {
@@ -108,10 +118,12 @@ class Api {
 
 };
 
+
 export const api = new Api({
-    baseUrl: "https://around.nomoreparties.co/v1/group-12",
-    headers: {
-      authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435",
-      "Content-Type": "application/json"
-    }
-  }); 
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435",
+    "Content-Type": "application/json"
+  }
+}); 
+
