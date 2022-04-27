@@ -14,7 +14,12 @@
         </header>
         <main class="content">
             <div class="profile">
-                <img class="profile__picture" src="<%=require('./images/profile_pic.jpg')%>" alt="picture of jacque cousteau">
+                <div class="profile__picture-container">
+                    <img class="profile__picture" src="<%=require('./images/profile_pic.jpg')%>" alt="picture of jacque cousteau">
+                    <div class="profile__picture-overlay">
+                        <img src="<%=require('./images/pen.svg')%>" alt="pen icon" class="profile__picture-icon">
+                    </div>
+                </div>
                 <div class="profile__content">
                     <div class="profile__title">
                         <h1 class="profile__name"></h1>
