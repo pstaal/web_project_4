@@ -10,3 +10,6 @@ export const placeForm = document.querySelector('.popup__form-place');
 export const pictureForm = document.querySelector('.popup__form-profile-picture');
 export const profilePicture = document.querySelector('.profile__picture');
 export const profilePictureButton = document.querySelector('.profile__picture-container');
+export const profileButton = document.querySelector('.popup__button-profile');
+export const placeButton = document.querySelector('.popup__button-place');
+export const pictureButton = document.querySelector('.popup__button-picture');

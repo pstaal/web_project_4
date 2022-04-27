@@ -1,6 +1,6 @@
 import Card from "./Card";
 import Section from "./Section";
-import { profilePicture } from "../utils/constants";
+import { profilePicture, profileButton, placeButton, pictureButton } from "../utils/constants";
 import UserInfo from "./UserInfo";
 import PopupConfirmation from "./PopupConfirmation";
 import PopupWithImage from "./PopupWithImage";
@@ -65,17 +65,19 @@ class Api {
       }
 
 
-      addCart(data){
+      addCart({title, link}){
+        placeButton.textContent = "Saving...";
         fetch(`${this._baseUrl}/cards`, {
           method: "POST",
           headers: this._headers,
           body: JSON.stringify({
-            name: data.title,
-            link: data.link
+            name: title,
+            link
           })
         })
         .then((res) => res.json())
         .then((result) => {
+          placeButton.textContent = "Create";
           const element = createCard({text: result.name, imageLink: result.link, likes: result.likes, owner: document.querySelector(".profile__name").innerHTML, _id: result._id}, "#card-template", handleCardClick, popupConfirmation);
           this._section.addItem(element);
         });
@@ -114,6 +116,7 @@ class Api {
      }
 
      changePicture({avatar}){
+      pictureButton.textContent = "Saving...";
       fetch(`${this._baseUrl}/users/me/avatar`, {
           method: "PATCH",
           headers: this._headers,
@@ -123,7 +126,7 @@ class Api {
         })
         .then(res => res.json())
             .then((result) => {
-              console.log(result);
+                pictureButton.textContent = "Save";
                 profilePicture.src = result.avatar;
         });
       }
@@ -139,16 +142,20 @@ class Api {
             })
       }
 
-      setNewUser(data) {
+      setNewUser({userName, userJob}) {
+        profileButton.textContent = "Saving...";
         fetch(`${this._baseUrl}/users/me`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
-              name: data.userName,
-              about: data.userJob
+              name: userName,
+              about: userJob
             })
             }).then(res => res.json())
-              .then(data => userInfo.setUserInfo({ userName: data.name, userJob: data.about})); 
+              .then(data => {
+                profileButton.textContent = "Save";
+                userInfo.setUserInfo({ userName: data.name, userJob: data.about}); 
+              });
       }
     
     
