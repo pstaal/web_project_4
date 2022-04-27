@@ -28,11 +28,6 @@ export default class Card {
         this._element = null;
     }
 
-    setUser(userName) {
-      return userInfo.getUserInfo().userName;
-    }
-   
-
 
     _setEventListeners() {
         this._element.querySelector(".places__card-button").addEventListener("click", () => {
@@ -51,11 +46,11 @@ export default class Card {
 
     generateCard() {
         this._element = this._getTemplate();
-        this._user = this._setUser();
-        console.log(this._user);
+        console.log(this.id);
+        console.log(this._likes);
         this._element.setAttribute("id", this.id);
         this._heartIcon = this._element.querySelector(".places__card-button");
-        if(this._likes.some(item => item.name === this._user)) {
+        if(this._likes.some(item => item._id === this.id)) {
           this._heartIcon.classList.add('places__card-button-liked');
         }
         if(this._owner !== this._user) {
