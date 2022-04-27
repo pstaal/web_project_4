@@ -42,12 +42,21 @@ class Api {
         this._headers = headers;
         this._section = null;
       }
-    
-      getInitialCards() {
-            fetch(`${this._baseUrl}/cards`, {
+
+      initialize() {
+        return Promise.all([
+          fetch(`${this._baseUrl}/cards`, {
+            headers: this._headers
+          }),
+          fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
           })
-            .then(res => res.json())
+        ]);
+      }
+    
+      getInitialCards() {
+            this.initialize()
+            .then(res => res[0].json())
             .then((result) => {
               const section = new Section({ 
                 items: result, 
@@ -62,6 +71,15 @@ class Api {
               
               this._section.renderItems();
             });  
+      }
+
+      getInitialUser() {
+        this.initialize()
+            .then(res => res[1].json())
+            .then((result) => {
+                userInfo.setUserInfo({userName: result.name, userJob: result.about});
+                profilePicture.src = result.avatar;
+            })
       }
 
 
