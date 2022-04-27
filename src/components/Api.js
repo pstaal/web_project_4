@@ -113,6 +113,21 @@ class Api {
        }
      }
 
+     changePicture({avatar}){
+      fetch(`${this._baseUrl}/users/me/avatar`, {
+          method: "PATCH",
+          headers: this._headers,
+          body: JSON.stringify({
+            avatar
+          })
+        })
+        .then(res => res.json())
+            .then((result) => {
+              console.log(result);
+                profilePicture.src = result.avatar;
+        });
+      }
+
       getInitialUser() {
         fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers

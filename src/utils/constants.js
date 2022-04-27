@@ -4,7 +4,9 @@ export const nameInput = document.querySelector("[name='userName']");
 export const titleInput = document.querySelector("[name='userJob']"); 
 export const popupProfileSelector = document.querySelector('.popup-profile');
 export const popupPlaceSelector = document.querySelector('.popup-place');
+export const popupPictureSelector = document.querySelector('.popup-profile-picture');
 export const profileForm = document.querySelector('.popup__form-profile');
 export const placeForm = document.querySelector('.popup__form-place');
+export const pictureForm = document.querySelector('.popup__form-profile-picture');
 export const profilePicture = document.querySelector('.profile__picture');
-
+export const profilePictureButton = document.querySelector('.profile__picture-container');

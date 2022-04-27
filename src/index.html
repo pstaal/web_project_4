@@ -67,6 +67,18 @@
                 </div>
             </div>
 
+            <div class="popup popup-profile-picture">
+                <div class="popup__container">
+                    <button type="button" class="popup__close"></button>
+                    <h3 class="popup__title">Change profile picture</h3>
+                    <form name="popupform" class="popup__form popup__form-profile-picture">
+                        <input id="profile-input" required placeholder="New profile image URL" name="avatar" class="popup__input" type="url">
+                        <span class="profile-input-error popup__input-error"></span>
+                        <button type="submit" class="popup__button popup__button_disabled" disabled>Save</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="popup popup-confirm">
                 <div class="popup__container">
                     <button type="button" class="popup__close"></button>
