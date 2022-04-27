@@ -1,8 +1,5 @@
 import { api, userInfo } from "./Api";
 
-
-
-
 export default class Card {
 
     constructor(data, cardSelector, handleCardClick, popupConfirmation) {
@@ -14,7 +11,6 @@ export default class Card {
         this._popupConfirmation = popupConfirmation;
         this._owner = data.owner;
         this.id = data._id;
-        this._user = userInfo.getUserInfo().userName;
     }
 
     _getTemplate(){
@@ -30,6 +26,10 @@ export default class Card {
     removeCard(){
         this._element.remove();
         this._element = null;
+    }
+
+    setUser(userName) {
+      return userInfo.getUserInfo().userName;
     }
    
 
@@ -51,6 +51,8 @@ export default class Card {
 
     generateCard() {
         this._element = this._getTemplate();
+        this._user = this._setUser();
+        console.log(this._user);
         this._element.setAttribute("id", this.id);
         this._heartIcon = this._element.querySelector(".places__card-button");
         if(this._likes.some(item => item.name === this._user)) {
