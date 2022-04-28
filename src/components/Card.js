@@ -1,4 +1,4 @@
-import { api, userInfo } from "./Api";
+import { api } from "../pages/index.js";
 
 export default class Card {
 
@@ -9,8 +9,9 @@ export default class Card {
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._popupConfirmation = popupConfirmation;
-        this._owner = data.owner;
+        this._ownerId = data.owner;
         this.id = data._id;
+        this._userId = data.currentId;
     }
 
     _getTemplate(){
@@ -20,8 +21,16 @@ export default class Card {
     }
 
     _toggleHeart(){
-        this._heartIcon.classList.toggle('places__card-button-liked');
+      let liked = this._element.querySelector(".places__card-button").classList.contains("places__card-button-liked");
+      this._heartIcon.classList.toggle('places__card-button-liked');
+      api.toggleLike(this.id, liked).then((result) => {
+            this._element.querySelector(".places__likes-counter").innerHTML = result.likes.length;
+          })
+          .catch((err) => {
+            console.log(err); // log the error to the console
+          });
     }
+    
 
     removeCard(){
         this._element.remove();
@@ -31,7 +40,6 @@ export default class Card {
 
     _setEventListeners() {
         this._element.querySelector(".places__card-button").addEventListener("click", () => {
-            api.toggleLike(this.id);
             this._toggleHeart();
           });
           if(this._element.querySelector(".places__card-delete-icon")){ 
@@ -46,14 +54,11 @@ export default class Card {
 
     generateCard() {
         this._element = this._getTemplate();
-        console.log(this.id);
-        console.log(this._likes);
-        this._element.setAttribute("id", this.id);
         this._heartIcon = this._element.querySelector(".places__card-button");
-        if(this._likes.some(item => item._id === this.id)) {
+        if(this._likes.some(item => item._id === this._userId)) {
           this._heartIcon.classList.add('places__card-button-liked');
         }
-        if(this._owner !== this._user) {
+        if(this._ownerId !== this._userId) {
           this._element.querySelector(".places__card-delete-icon").remove();
         }
         this._setEventListeners(); 
