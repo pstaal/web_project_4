@@ -53,9 +53,9 @@ export default class Api {
       .then(res => this._handleResponse(res)); 
      }
 
-     toggleLike(id, liked) {
+     toggleLike(id, isLiked) {
         return fetch(`${this._baseUrl}/cards/likes/${id}`, {
-          method: liked ? "DELETE" : "PUT",
+          method: isLiked ? "DELETE" : "PUT",
           headers: this._headers
         })
         .then(res => this._handleResponse(res)); 

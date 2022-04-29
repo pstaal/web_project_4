@@ -21,9 +21,9 @@ export default class Card {
     }
 
     _toggleHeart(){
-      let liked = this._element.querySelector(".places__card-button").classList.contains("places__card-button-liked");
+      let isLiked = this._element.querySelector(".places__card-button").classList.contains("places__card-button-liked");
       this._heartIcon.classList.toggle('places__card-button-liked');
-      api.toggleLike(this.id, liked).then((result) => {
+      api.toggleLike(this.id, isLiked).then((result) => {
             this._element.querySelector(".places__likes-counter").innerHTML = result.likes.length;
           })
           .catch((err) => {
