@@ -24,16 +24,22 @@ export const api = new Api({
   }
 }); 
 
-
-//handleclick function for deleting card
-function handleClick(card) {
-  api.deleteCard(card.id);
-  card.removeCard();
-}
-
 //instantiate popup confirmation class
 const popupConfirmation = new PopupConfirmation(".popup-confirm", handleClick);
 popupConfirmation.setEventListeners();
+
+//handleclick function for deleting card
+function handleClick(card) {
+  api.deleteCard(card.id).then(res => {
+    console.log(res);
+    popupConfirmation.close();
+  })
+  .catch((err) => {
+    console.log(err); // log the error to the console
+  });
+  card.removeCard();
+}
+
 
 //instantiate popupimage class
 const popupImage = new PopupWithImage(".popup-picture");
@@ -160,6 +166,7 @@ function handleProfileSubmit(data) {
   api.setNewUser(data).then(data => {
     profileButton.textContent = "Save";
     userInfo.setUserInfo({ userName: data.name, userJob: data.about}); 
+    popupProfile.close();
   })
   .catch((err) => {
     console.log(err); // log the error to the console
@@ -172,8 +179,9 @@ function handleProfileSubmit(data) {
   placeButton.textContent = "Saving...";
   api.addCart(data).then((result) => {
     placeButton.textContent = "Create";
-    const element = createCard({text: result.name, imageLink: result.link, likes: result.likes, owner: document.querySelector(".profile__name").innerHTML, _id: result._id, currentId}, "#card-template", handleCardClick, popupConfirmation);
+    const element = createCard({text: result.name, imageLink: result.link, likes: result.likes, owner: currentId, _id: result._id, currentId}, "#card-template", handleCardClick, popupConfirmation);
     section.addItem(element);
+    popupPlace.close();
   })
   .catch((err) => {
     console.log(err); // log the error to the console
@@ -187,6 +195,7 @@ function handlePictureSubmit(data){
   api.changePicture(data).then((result) => {
     pictureButton.textContent = "Save";
     profilePicture.src = result.avatar;
+    popupProfilePicture.close();
   })
   .catch((err) => {
     console.log(err); // log the error to the console

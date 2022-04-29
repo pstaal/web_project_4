@@ -49,7 +49,8 @@ export default class Api {
       return fetch(`${this._baseUrl}/cards/${id}`, {
         method: "DELETE",
         headers: this._headers
-      });
+      })
+      .then(res => this._handleResponse(res)); 
      }
 
      toggleLike(id, liked) {
