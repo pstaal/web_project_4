@@ -13,3 +13,10 @@ export const profilePictureButton = document.querySelector('.profile__picture-co
 export const profileButton = document.querySelector('.popup__button-profile');
 export const placeButton = document.querySelector('.popup__button-place');
 export const pictureButton = document.querySelector('.popup__button-picture');
+export const validationSettings = {
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_disabled",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__error_visible"
+  };

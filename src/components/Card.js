@@ -1,8 +1,6 @@
-import { api } from "../pages/index.js";
-
 export default class Card {
 
-    constructor(data, cardSelector, handleCardClick, popupConfirmation) {
+    constructor(data, cardSelector, handleCardClick, popupConfirmation, toggleLike) {
         this._text = data.text;
         this._imageLink = data.imageLink;
         this._likes = data.likes;
@@ -12,6 +10,7 @@ export default class Card {
         this._ownerId = data.owner;
         this.id = data._id;
         this._userId = data.currentId;
+        this._toggleLike = toggleLike;
     }
 
     _getTemplate(){
@@ -19,18 +18,6 @@ export default class Card {
 
         return cardElement;
     }
-
-    _toggleHeart(){
-      let isLiked = this._element.querySelector(".places__card-button").classList.contains("places__card-button-liked");
-      this._heartIcon.classList.toggle('places__card-button-liked');
-      api.toggleLike(this.id, isLiked).then((result) => {
-            this._element.querySelector(".places__likes-counter").innerHTML = result.likes.length;
-          })
-          .catch((err) => {
-            console.log(err); // log the error to the console
-          });
-    }
-    
 
     removeCard(){
         this._element.remove();
@@ -40,8 +27,8 @@ export default class Card {
 
     _setEventListeners() {
         this._element.querySelector(".places__card-button").addEventListener("click", () => {
-            this._toggleHeart();
-          });
+            this._toggleLike();
+        });
           if(this._element.querySelector(".places__card-delete-icon")){ 
             this._element.querySelector(".places__card-delete-icon").addEventListener("click", () => {
               this._popupConfirmation.open(this);

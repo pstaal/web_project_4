@@ -2,7 +2,9 @@
 export default class FormValidator {
     constructor(settings, form) {
         this._settings = settings;
-        this._form = form;
+        this._form = document.querySelector(form);
+        this._buttonElement = document.querySelector(form).querySelector(this._settings.submitButtonSelector);
+        this._inputList = [...document.querySelector(form).querySelectorAll(this._settings.inputSelector)];
     }
     
     _hasInvalidInput (inputList) {
@@ -33,8 +35,7 @@ export default class FormValidator {
 
     _toggleButtonState (inputList, buttonElement) {
         if (this._hasInvalidInput(inputList)) {
-          buttonElement.classList.add(this._settings.inactiveButtonClass);
-          buttonElement.disabled = true;
+          this._disableButton(buttonElement);
         } else {
           buttonElement.classList.remove(this._settings.inactiveButtonClass);
           buttonElement.disabled = false;
@@ -58,50 +59,43 @@ export default class FormValidator {
         }
       }
 
-   _setEventListeners(form) {
-    form.addEventListener("submit", (evt) => {
+   _setEventListeners() {
+    this._form.addEventListener("submit", (evt) => {
         // Cancel default behavior for the form
         evt.preventDefault();
     });
 
-   
-
-    const inputList = [...form.querySelectorAll(this._settings.inputSelector)];
-    const buttonElement = form.querySelector(this._settings.submitButtonSelector);
-
-    form.addEventListener("reset", () => { 
-      this._disableButton(buttonElement); 
+    this._form.addEventListener("reset", () => { 
+      this._disableButton(this._buttonElement); 
+      this.resetValidation();
     }); 
   
     // Iterate over the resulting array
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       // add the input event handler to each field
       inputElement.addEventListener("input", () => {
         // Call the toggleInputError() function inside the callback,
         // and pass the form and the element to be checked to it
-        this._toggleInputError(form, inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleInputError(this._form, inputElement);
+        this._toggleButtonState(this._inputList, this._buttonElement);
       });
     });
 
   }
 
-  resetValidation (popup){ 
+  resetValidation (){ 
+   
 
-    const inputElements = Array.from(popup.querySelectorAll(".popup__input")); 
-    const form = document.querySelector(this._form);
+    this._inputList.forEach((inputElement) => { 
 
-    inputElements.forEach((inputElement) => { 
-
-        this._hideInputError(form, inputElement); 
+        this._hideInputError(this._form, inputElement); 
 
     }); 
 
   }; 
 
    enableValidation() {
-        const form = document.querySelector(this._form);
 
-        this._setEventListeners(form);
+        this._setEventListeners(this._form);
   }
 }

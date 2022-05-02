@@ -6,7 +6,7 @@ import Section from "../components/Section";
 import UserInfo from "../components/UserInfo";
 import PopupConfirmation from "../components/PopupConfirmation";
 import PopupWithImage from "../components/PopupWithImage";
-import { profilePicture, profileButton, placeButton, pictureButton, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm, pictureForm, profilePictureButton, popupPictureSelector } from "../utils/constants.js";
+import { validationSettings, profilePicture, profileButton, placeButton, pictureButton, newPlaceButton, editButton, nameInput, titleInput, popupProfileSelector, popupPlaceSelector, profileForm, placeForm, pictureForm, profilePictureButton, popupPictureSelector } from "../utils/constants.js";
 import "./styles.css";
 
 
@@ -31,13 +31,24 @@ popupConfirmation.setEventListeners();
 //handleclick function for deleting card
 function handleClick(card) {
   api.deleteCard(card.id).then(res => {
-    console.log(res);
     popupConfirmation.close();
+    card.removeCard();
   })
   .catch((err) => {
     console.log(err); // log the error to the console
   });
-  card.removeCard();
+}
+
+//toggleLike function
+function toggleLike() {
+  let isLiked = this._element.querySelector(".places__card-button").classList.contains("places__card-button-liked");
+  this._heartIcon.classList.toggle('places__card-button-liked');
+  api.toggleLike(this.id, isLiked).then((result) => {
+        this._element.querySelector(".places__likes-counter").innerHTML = result.likes.length;
+      })
+      .catch((err) => {
+        console.log(err); // log the error to the console
+      });
 }
 
 
@@ -50,8 +61,8 @@ export const userInfo = new UserInfo({userNameSelector: '.profile__name', userJo
 
 
 //function to create a new card
-function createCard(data, template, callback, popupConfirmation) {
-    const card = new Card(data, template, callback, popupConfirmation);
+function createCard(data, template, callback, popupConfirmation, toggleLike) {
+    const card = new Card(data, template, callback, popupConfirmation, toggleLike);
     return card.generateCard();
 }
 
@@ -68,9 +79,8 @@ api.initialize().then(res => {
   section = new Section({ 
     items: data, 
     renderer: (item) => {
-      console.log(item)
       currentId = user._id;
-      const element = createCard({text: item.name, imageLink: item.link, likes: item.likes, owner: item.owner._id, _id: item._id, currentId}, "#card-template", handleCardClick, popupConfirmation);
+      const element = createCard({text: item.name, imageLink: item.link, likes: item.likes, owner: item.owner._id, _id: item._id, currentId}, "#card-template", handleCardClick, popupConfirmation, toggleLike);
       section.addItem(element);
     }
     },
@@ -78,8 +88,7 @@ api.initialize().then(res => {
   );
   section.renderItems();
 
-  userInfo.setUserInfo({userName: user.name, userJob: user.about});
-  profilePicture.src = user.avatar;
+  userInfo.setUserInfo({userName: user.name, userJob: user.about, userAvatar: user.avatar});
 
   })
   .catch((err) => {
@@ -100,33 +109,15 @@ const popupProfilePicture = new PopupWithForm(".popup-profile-picture", handlePi
 popupProfilePicture.setEventListeners();
 
 //enable form validation
-const profileValidator = new FormValidator({
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible"
-}, ".popup__form-profile");
+const profileValidator = new FormValidator( validationSettings, ".popup__form-profile");
 
 profileValidator.enableValidation();
 
-const placeValidator = new FormValidator({
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible"
-}, ".popup__form-place");
+const placeValidator = new FormValidator( validationSettings, ".popup__form-place");
 
 placeValidator.enableValidation();
 
-const pictureValidator = new FormValidator({
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible"
-}, ".popup__form-profile-picture");
+const pictureValidator = new FormValidator( validationSettings, ".popup__form-profile-picture");
 
 pictureValidator.enableValidation();
 
@@ -147,7 +138,7 @@ function openProfilePicture () {
 
 //function to open profile
 function openProfilePopup () {
-  profileValidator.resetValidation(popupProfileSelector);  
+  profileValidator.resetValidation();  
   const { userName, userJob } = userInfo.getUserInfo();
   nameInput.value = userName;
   titleInput.value = userJob;
@@ -162,45 +153,48 @@ function openPlaceForm () {
 
 //create handle submit function for changing profile
 function handleProfileSubmit(data) {
-  profileButton.textContent = "Saving...";
+  popupProfile.renderLoading(true);
   api.setNewUser(data).then(data => {
-    profileButton.textContent = "Save";
-    userInfo.setUserInfo({ userName: data.name, userJob: data.about}); 
+    userInfo.setUserInfo({ userName: data.name, userJob: data.about, userAvatar: data.avatar}); 
     popupProfile.close();
   })
   .catch((err) => {
     console.log(err); // log the error to the console
+  })
+  .finally(() => {
+    popupProfile.renderLoading(false);
   });
-  profileForm.reset();
 }
 
 //create handle submit function for adding new places
  function handlePlaceSubmit(data){
-  placeButton.textContent = "Saving...";
+  popupPlace.renderLoading(true);
   api.addCart(data).then((result) => {
-    placeButton.textContent = "Create";
-    const element = createCard({text: result.name, imageLink: result.link, likes: result.likes, owner: currentId, _id: result._id, currentId}, "#card-template", handleCardClick, popupConfirmation);
+    const element = createCard({text: result.name, imageLink: result.link, likes: result.likes, owner: currentId, _id: result._id, currentId}, "#card-template", handleCardClick, popupConfirmation, toggleLike);
     section.addItem(element);
     popupPlace.close();
   })
   .catch((err) => {
     console.log(err); // log the error to the console
+  })
+  .finally(() => {
+    popupPlace.renderLoading(false);
   });
-  placeForm.reset();
-};
+}
 
 //create handle submit for new profile picture
 function handlePictureSubmit(data){
-  pictureButton.textContent = "Saving...";
+  popupProfilePicture.renderLoading(true);
   api.changePicture(data).then((result) => {
-    pictureButton.textContent = "Save";
-    profilePicture.src = result.avatar;
+    userInfo.setUserInfo({userName: result.name, userJob: result.about, userAvatar: result.avatar});
     popupProfilePicture.close();
   })
   .catch((err) => {
     console.log(err); // log the error to the console
+  })
+  .finally(() => {
+    popupProfilePicture.renderLoading(false);
   });
-  pictureForm.reset();
 }
 
 
