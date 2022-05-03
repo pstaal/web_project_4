@@ -57,7 +57,7 @@ const popupImage = new PopupWithImage(".popup-picture");
 popupImage.setEventListeners();
 
 //instantiate user info class
-export const userInfo = new UserInfo({userNameSelector: '.profile__name', userJobSelector: '.profile__function'});
+export const userInfo = new UserInfo({userNameSelector: '.profile__name', userJobSelector: '.profile__function', pictureSelector: '.profile__picture'});
 
 
 //function to create a new card
