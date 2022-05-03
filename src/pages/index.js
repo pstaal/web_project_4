@@ -40,11 +40,9 @@ function handleClick(card) {
 }
 
 //toggleLike function
-function toggleLike() {
-  let isLiked = this._element.querySelector(".places__card-button").classList.contains("places__card-button-liked");
-  this._heartIcon.classList.toggle('places__card-button-liked');
-  api.toggleLike(this.id, isLiked).then((result) => {
-      this._likeCounter.textContent = result.likes.length;
+function toggleLike(card) {
+  api.toggleLike(this.id, card.isLiked()).then((result) => {
+      card.setLikes(result);
       })
       .catch((err) => {
         console.log(err); // log the error to the console

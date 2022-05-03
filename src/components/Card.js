@@ -24,10 +24,19 @@ export default class Card {
         this._element = null;
     }
 
+    isLiked() {
+      return this._element.querySelector(".places__card-button").classList.contains("places__card-button-liked");
+    }
+
+    setLikes(result) {
+      this._heartIcon.classList.toggle('places__card-button-liked');
+      this._likeCounter.textContent = result.likes.length;
+    }
+
 
     _setEventListeners() {
         this._heartIcon.addEventListener("click", () => {
-            this._toggleLike();
+            this._toggleLike(this);
         });
           if(this._trashIcon){ 
             this._trashIcon.addEventListener("click", () => {
