@@ -132,13 +132,11 @@ profilePictureButton.addEventListener('click', openProfilePicture);
 
 //function to open form for picture change
 function openProfilePicture () {
-  pictureValidator.resetValidation(popupPictureSelector);
   popupProfilePicture.open();
 }
 
 //function to open profile
 function openProfilePopup () {
-  profileValidator.resetValidation();  
   const { userName, userJob } = userInfo.getUserInfo();
   nameInput.value = userName;
   titleInput.value = userJob;
@@ -147,7 +145,6 @@ function openProfilePopup () {
 
 //function to open place form
 function openPlaceForm () {
-  placeValidator.resetValidation(popupPlaceSelector);
   popupPlace.open();
 }
 
