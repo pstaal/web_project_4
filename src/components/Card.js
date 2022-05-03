@@ -26,15 +26,15 @@ export default class Card {
 
 
     _setEventListeners() {
-        this._element.querySelector(".places__card-button").addEventListener("click", () => {
+        this._heartIcon.addEventListener("click", () => {
             this._toggleLike();
         });
-          if(this._element.querySelector(".places__card-delete-icon")){ 
-            this._element.querySelector(".places__card-delete-icon").addEventListener("click", () => {
+          if(this._trashIcon){ 
+            this._trashIcon.addEventListener("click", () => {
               this._popupConfirmation.open(this);
             });
           }
-          this._element.querySelector(".places__card-image").addEventListener("click", (evt) => {
+          this._pictureElement.addEventListener("click", (evt) => {
             this._handleCardClick({ link: this._imageLink, text: this._text }); 
           });
     }
@@ -42,17 +42,20 @@ export default class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._heartIcon = this._element.querySelector(".places__card-button");
+        this._likeCounter = this._element.querySelector(".places__likes-counter");
+        this._pictureElement = this._element.querySelector(".places__card-image");
+        this._trashIcon = this._element.querySelector(".places__card-delete-icon");
         if(this._likes.some(item => item._id === this._userId)) {
           this._heartIcon.classList.add('places__card-button-liked');
         }
         if(this._ownerId !== this._userId) {
-          this._element.querySelector(".places__card-delete-icon").remove();
+          this._trashIcon.remove();
         }
         this._setEventListeners(); 
-        this._element.querySelector(".places__card-image").src = this._imageLink;
-        this._element.querySelector(".places__card-image").alt = this._text;
+        this._pictureElement.src = this._imageLink;
+        this._pictureElement.alt = this._text;
         this._element.querySelector(".places__card-title").textContent = this._text;
-        this._element.querySelector(".places__likes-counter").textContent = this._likes.length;
+        this._likeCounter.textContent = this._likes.length;
       
         return this._element;
       } 

@@ -44,7 +44,7 @@ function toggleLike() {
   let isLiked = this._element.querySelector(".places__card-button").classList.contains("places__card-button-liked");
   this._heartIcon.classList.toggle('places__card-button-liked');
   api.toggleLike(this.id, isLiked).then((result) => {
-        this._element.querySelector(".places__likes-counter").innerHTML = result.likes.length;
+      this._likeCounter.textContent = result.likes.length;
       })
       .catch((err) => {
         console.log(err); // log the error to the console
