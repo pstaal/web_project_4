@@ -41,7 +41,7 @@ function handleClick(card) {
 
 //toggleLike function
 function toggleLike(card) {
-  api.toggleLike(this.id, card.isLiked()).then((result) => {
+  api.toggleLike(card.id, card.isLiked()).then((result) => {
       card.setLikes(result);
       })
       .catch((err) => {
